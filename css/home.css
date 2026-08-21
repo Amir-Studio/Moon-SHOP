@@ -1,0 +1,710 @@
+/* ============================================================
+   HOME.CSS — GONZO SHOP
+   نسخه سینمایی — اصلاح نهایی
+   ============================================================ */
+
+
+/* ============================================================
+   1. INTRO SHORT
+   ============================================================ */
+
+.intro-short {
+    display: none !important;
+}
+
+.intro-short-content {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.intro-short-content h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+    font-family: var(--font-gang);
+}
+
+.intro-tagline {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    font-weight: 400;
+    font-family: var(--font-gang);
+}
+
+.intro-short-content p:last-of-type {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    font-weight: 400;
+    letter-spacing: 0.2px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+    .intro-short {
+        padding: 40px 0 24px;
+    }
+
+    .intro-short-content h2 {
+        font-size: 34px;
+    }
+
+    .intro-tagline {
+        font-size: 16px;
+    }
+
+    .intro-short-content p:last-of-type {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .intro-short {
+        padding: 44px 0 28px;
+    }
+
+    .intro-short-content h2 {
+        font-size: 40px;
+    }
+}
+
+
+/* ============================================================
+   2. CATEGORIES
+   ============================================================ */
+
+.categories {
+    padding: 8px 0 14px;
+    background: var(--color-bg);
+}
+
+.category-tabs {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    padding: 4px 0 8px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+    -webkit-overflow-scrolling: touch;
+}
+
+.category-tabs::-webkit-scrollbar {
+    height: 3px;
+}
+
+.category-tabs::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 20px;
+}
+
+.category-tab {
+    flex: 0 0 auto;
+    padding: 8px 18px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    white-space: nowrap;
+    font-family: var(--font-gang);
+    letter-spacing: 0.5px;
+}
+
+.category-tab:hover {
+    color: var(--color-text-primary);
+    background: var(--color-accent-subtle);
+}
+
+.category-tab.active {
+    color: var(--color-text-primary);
+    background: rgba(124, 58, 237, 0.04);
+    border-color: rgba(124, 58, 237, 0.15);
+    box-shadow: 0 0 20px rgba(124, 58, 237, 0.02);
+}
+
+
+/* ============================================================
+   3. TRUST MODERN
+   ============================================================ */
+
+.trust-modern {
+    padding: 48px 0;
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.trust-steps-modern {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 24px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+@media (min-width: 640px) {
+    .trust-steps-modern {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.trust-step-modern {
+    text-align: center;
+    padding: 16px 8px;
+    background: var(--color-bg-surface);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    transition: border-color var(--transition-fast);
+}
+
+.trust-step-modern:hover {
+    border-color: var(--color-text-secondary);
+}
+
+.step-number-modern {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    color: var(--color-text-primary);
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 10px;
+    font-family: var(--font-gang);
+    border: 1px solid var(--color-border);
+}
+
+.trust-step-modern h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--color-text-primary);
+    font-family: var(--font-gang);
+    letter-spacing: 0.5px;
+}
+
+.trust-step-modern p {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+}
+
+
+/* ============================================================
+   4. GUIDE SUMMARY
+   ============================================================ */
+
+.guide-summary {
+    padding: 48px 0;
+    background: var(--color-bg);
+}
+
+.guide-steps {
+    counter-reset: step;
+    max-width: 600px;
+    margin: 0 auto 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.guide-steps li {
+    counter-increment: step;
+    padding: 14px 44px 14px 16px;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    position: relative;
+    font-size: 15px;
+    color: var(--color-text-primary);
+}
+
+.guide-steps li::before {
+    content: counter(step);
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
+    font-weight: 700;
+    font-size: 12px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-gang);
+    border: 1px solid var(--color-border);
+}
+
+.guide-summary .btn-outline {
+    display: inline-block;
+    margin: 0 auto;
+}
+
+
+/* ============================================================
+   5. FOOTER
+   ============================================================ */
+
+.site-footer {
+    padding: 40px 0 20px;
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.footer-brand .brand {
+    justify-content: center;
+}
+
+.footer-brand .monogram {
+    width: 32px;
+    height: 32px;
+    background: var(--color-accent);
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 14px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(124, 58, 237, 0.06);
+    font-family: var(--font-gang);
+}
+
+.footer-brand .brand-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    font-family: var(--font-gang);
+    letter-spacing: 1px;
+}
+
+.footer-tagline {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 24px;
+    margin: 8px 0;
+}
+
+.footer-social a {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast);
+    position: relative;
+    padding: 4px 0;
+    font-family: var(--font-gang);
+    letter-spacing: 0.5px;
+}
+
+.footer-social a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-accent);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.footer-social a:hover {
+    color: var(--color-text-primary);
+}
+
+.footer-social a:hover::after {
+    opacity: 0.3;
+}
+
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    justify-content: center;
+}
+
+.footer-nav a {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast);
+    padding: 2px 0;
+    font-family: var(--font-gang);
+    letter-spacing: 0.5px;
+}
+
+.footer-nav a:hover {
+    color: var(--color-text-primary);
+}
+
+.footer-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--color-accent);
+    opacity: 0.15;
+    margin: 4px 0;
+}
+
+.footer-copy {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.3px;
+}
+
+
+/* ============================================================
+   6. INTRO FULL
+   ============================================================ */
+
+.intro {
+    padding: 48px 0;
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.intro-content h2 {
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: center;
+    color: var(--color-text-primary);
+    font-family: var(--font-gang);
+    letter-spacing: 1px;
+}
+
+@media (min-width: 1024px) {
+    .intro-content h2 {
+        font-size: 32px;
+    }
+}
+
+.intro-content p {
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+    text-align: justify;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.intro-features {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    margin: 32px 0;
+}
+
+@media (min-width: 640px) {
+    .intro-features {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.intro-feature {
+    display: flex;
+    gap: 16px;
+    background: var(--color-bg);
+    padding: 16px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+}
+
+.intro-icon {
+    font-size: 22px;
+    flex-shrink: 0;
+    color: var(--color-accent);
+    opacity: 0.7;
+}
+
+.intro-feature h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 4px;
+    font-family: var(--font-gang);
+    letter-spacing: 0.5px;
+}
+
+.intro-feature p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin: 0;
+    text-align: justify;
+}
+
+.intro-notice {
+    background: rgba(124, 58, 237, 0.02);
+    border-right: 3px solid var(--color-accent);
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin: 24px 0;
+}
+
+.intro-notice p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin: 0;
+}
+
+.intro-closing {
+    font-weight: 700;
+    color: var(--color-text-primary);
+    text-align: center;
+    font-size: 18px;
+    margin-top: 16px;
+    font-family: var(--font-gang);
+    letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   7. SUPPORT SECTION
+   ============================================================ */
+
+.support-section {
+    padding: 48px 0 32px;
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.support-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.support-content h2 {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 24px;
+    font-family: var(--font-gang);
+    letter-spacing: 2px;
+}
+
+.support-info {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 28px 24px;
+}
+
+.support-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 12px;
+}
+
+.support-label {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.support-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-accent);
+    font-family: monospace;
+    letter-spacing: 0.5px;
+    background: rgba(124, 58, 237, 0.04);
+    padding: 4px 16px;
+    border-radius: 6px;
+    border: 1px solid rgba(124, 58, 237, 0.1);
+}
+
+.btn-copy-support {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: var(--font-family);
+}
+
+.btn-copy-support:hover {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--color-text-secondary);
+    color: var(--color-text-primary);
+}
+
+.support-text {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin: 8px 0 0;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media (max-width: 640px) {
+    .support-section {
+        padding: 32px 0 24px;
+    }
+
+    .support-content h2 {
+        font-size: 22px;
+    }
+
+    .support-info {
+        padding: 20px 16px;
+    }
+
+    .support-item {
+        gap: 8px;
+    }
+
+    .support-value {
+        font-size: 16px;
+    }
+
+    .btn-copy-support {
+        font-size: 12px;
+        padding: 4px 12px;
+    }
+}
+
+
+/* ============================================================
+   8. HOME BANNER
+   ============================================================ */
+
+/*
+   مهم:
+   کادر اصلی دقیقاً همان نسبت سینمایی قبلی است.
+   هیچ height یا transform روی خود تصویر اعمال نشده
+   تا اندازه عکس ناگهان بزرگ نشود.
+*/
+
+.home-banner {
+    position: relative;
+    width: 100%;
+    padding-bottom: 42%;
+    height: 0;
+    overflow: hidden;
+    background: var(--color-bg);
+
+    /* ۵۰ پیکسل پایین‌تر */
+    margin-top: 50px;
+}
+
+.home-banner-image {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.home-banner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+    /*
+     * فقط محل قرارگیری تصویر تغییر کرده.
+     * خود تصویر بزرگ یا کوچک نمی‌شود.
+     */
+    object-position: center 50%;
+
+    display: block;
+    transition: opacity 0.1s ease;
+}
+
+
+/* ============================================================
+   9. حذف متن روی عکس
+   ============================================================ */
+
+.home-banner-content {
+    display: none !important;
+}
+
+.home-banner-content .banner-tagline {
+    display: none !important;
+}
+
+
+/* ============================================================
+   10. OVERLAY
+   ============================================================ */
+
+.home-banner-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.1) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+}
+
+
+/* ============================================================
+   11. RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 640px) {
+
+    .home-banner {
+        padding-bottom: 42%;
+        margin-top: 50px;
+    }
+
+    .home-banner-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 50%;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+
+    .home-banner {
+        padding-bottom: 42%;
+        margin-top: 50px;
+    }
+
+    .home-banner-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 50%;
+    }
+}

@@ -1,0 +1,165 @@
+/* ============================================================
+   SELL PAGE — MOON SHOP (فروش اکانت)
+   ============================================================ */
+
+.sell-page {
+    padding: 32px 0 60px;
+    background: var(--color-bg);
+    min-height: 70vh;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 32px;
+    text-align: center;
+    letter-spacing: 0.5px;
+    font-family: var(--font-gang);
+}
+
+/* ===== محتوای اصلی ===== */
+.sell-content {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 36px 40px;
+    text-align: center;
+}
+
+.sell-content p {
+    font-size: 16px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.sell-content p:last-of-type {
+    margin-bottom: 28px;
+}
+
+/* ===== اطلاعات تماس ===== */
+.support-info-sell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 16px 24px;
+    margin: 16px 0 24px;
+}
+
+.support-info-sell .support-label {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.support-info-sell .support-value {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-red);
+    font-family: monospace;
+    letter-spacing: 0.5px;
+    background: rgba(198, 40, 40, 0.08);
+    padding: 4px 16px;
+    border-radius: 6px;
+    border: 1px solid rgba(198, 40, 40, 0.15);
+}
+
+.support-info-sell .btn-copy-support {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 6px 14px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    font-family: var(--font-family);
+}
+
+.support-info-sell .btn-copy-support:hover {
+    border-color: var(--color-red);
+    color: var(--color-red);
+    background: rgba(198, 40, 40, 0.04);
+}
+
+.support-info-sell .btn-copy-support.copied {
+    border-color: #10B981;
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.06);
+}
+
+/* ===== دکمه بازگشت ===== */
+.sell-content .btn-secondary {
+    min-width: 200px;
+    padding: 12px 32px;
+    font-size: 15px;
+    border-radius: 8px;
+    background: var(--color-blue);
+    color: #fff;
+    border: none;
+    transition: all var(--transition-fast);
+    text-decoration: none;
+    display: inline-block;
+}
+
+.sell-content .btn-secondary:hover {
+    background: var(--color-blue-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(26, 107, 176, 0.3);
+}
+
+/* ===== ریسپانسیو ===== */
+@media (max-width: 640px) {
+    .sell-page {
+        padding: 16px 0 32px;
+    }
+
+    .page-title {
+        font-size: 22px;
+        margin-bottom: 24px;
+    }
+
+    .sell-content {
+        padding: 20px 16px;
+        border-radius: 12px;
+    }
+
+    .sell-content p {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    .support-info-sell {
+        flex-direction: column;
+        gap: 8px;
+        padding: 14px 16px;
+    }
+
+    .support-info-sell .support-value {
+        font-size: 16px;
+    }
+
+    .sell-content .btn-secondary {
+        min-width: 100%;
+        padding: 12px 20px;
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .sell-content {
+        padding: 28px 32px;
+    }
+
+    .support-info-sell {
+        padding: 14px 20px;
+    }
+}

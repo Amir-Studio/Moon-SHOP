@@ -1,0 +1,419 @@
+/* ============================================================
+   CHECKOUT.CSS — صفحه بررسی سفارش
+   ============================================================ */
+
+.checkout-page {
+    padding: 32px 0 60px;
+    background: var(--color-bg);
+    min-height: 70vh;
+}
+
+.page-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    margin-bottom: 32px;
+    text-align: center;
+}
+
+/* ===== خلاصه سفارش ===== */
+.order-summary {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+}
+
+.order-summary h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+}
+
+.order-item {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.order-item:last-child {
+    border-bottom: none;
+}
+
+.order-item-image {
+    width: 72px;
+    height: 72px;
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border);
+}
+
+.order-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.order-item-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.order-item-id {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.5px;
+}
+
+.order-item-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin: 0;
+    line-height: 1.3;
+}
+
+.order-item-stats {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+}
+
+.order-item-price {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-top: 2px;
+}
+
+.order-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 16px;
+    margin-top: 12px;
+    border-top: 2px solid var(--color-border);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.order-total .total-amount {
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.empty-order {
+    text-align: center;
+    padding: 24px 0;
+}
+
+.empty-order p {
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+}
+
+/* ===== شرایط ===== */
+.terms-section {
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 24px 28px;
+}
+
+.terms-section h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    margin-bottom: 12px;
+}
+
+.terms-section p {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    margin-bottom: 12px;
+}
+
+.terms-section p:last-of-type {
+    margin-bottom: 20px;
+}
+
+/* ===== چک‌باکس و خطا ===== */
+.terms-checkbox-wrapper {
+    margin-bottom: 18px;
+}
+
+.terms-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    user-select: none;
+}
+
+.terms-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--color-accent);
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.terms-checkbox:hover {
+    color: var(--color-text-primary);
+}
+
+.terms-error {
+    color: #EF4444;
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 10px;
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 12px;
+    background: rgba(239, 68, 68, 0.06);
+    border-radius: 8px;
+    border-right: 3px solid #EF4444;
+}
+
+.terms-error.show {
+    display: flex;
+}
+
+/* ===== دکمه ===== */
+.terms-section .btn-primary {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    background: var(--color-accent);
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    margin-top: 4px;
+}
+
+.terms-section .btn-primary:hover:not(:disabled) {
+    background: var(--color-accent-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.25);
+}
+
+.terms-section .btn-primary:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* ===== توضیحات زیر دکمه ===== */
+.terms-note {
+    margin-top: 14px;
+    padding: 12px 16px;
+    background: var(--color-bg-surface);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    text-align: center;
+}
+
+.terms-note p {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    margin: 0;
+    line-height: 1.6;
+}
+
+.terms-note p strong {
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+/* ============================================================
+   FOOTER (حرفه‌ای‌تر)
+   ============================================================ */
+.site-footer {
+    padding: 40px 0 20px;
+    background: var(--color-bg-secondary);
+    border-top: 1px solid var(--color-border);
+}
+
+.footer-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+}
+
+.footer-brand .brand {
+    justify-content: center;
+}
+
+.footer-brand .monogram {
+    width: 32px;
+    height: 32px;
+    background: var(--color-accent);
+    color: #FFFFFF;
+    font-weight: 800;
+    font-size: 13px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.15);
+}
+
+.footer-brand .brand-name {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+
+.footer-tagline {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+}
+
+.footer-social {
+    display: flex;
+    gap: 24px;
+    margin: 8px 0;
+}
+
+.footer-social a {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast);
+    position: relative;
+    padding: 4px 0;
+}
+
+.footer-social a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-accent);
+    opacity: 0;
+    transition: opacity var(--transition-fast);
+}
+
+.footer-social a:hover {
+    color: var(--color-text-primary);
+}
+
+.footer-social a:hover::after {
+    opacity: 0.3;
+}
+
+.footer-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    justify-content: center;
+}
+
+.footer-nav a {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    transition: color var(--transition-fast);
+    padding: 2px 0;
+}
+
+.footer-nav a:hover {
+    color: var(--color-text-primary);
+}
+
+.footer-divider {
+    width: 80px;
+    height: 1px;
+    background: var(--color-accent);
+    opacity: 0.15;
+    margin: 4px 0;
+}
+
+.footer-copy {
+    font-size: 12px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.3px;
+}
+
+/* ============================================================
+   ریسپانسیو
+   ============================================================ */
+@media (max-width: 640px) {
+    .checkout-page {
+        padding: 20px 0 40px;
+    }
+    .page-title {
+        font-size: 22px;
+        margin-bottom: 24px;
+    }
+    .order-summary {
+        padding: 16px;
+    }
+    .order-item {
+        gap: 12px;
+        padding: 12px 0;
+        flex-wrap: wrap;
+    }
+    .order-item-image {
+        width: 56px;
+        height: 56px;
+    }
+    .order-item-title {
+        font-size: 15px;
+    }
+    .order-item-price {
+        font-size: 15px;
+    }
+    .order-total {
+        font-size: 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .terms-section {
+        padding: 16px;
+    }
+    .terms-checkbox {
+        font-size: 14px;
+    }
+    .terms-section .btn-primary {
+        font-size: 15px;
+        padding: 12px;
+    }
+    .terms-note p {
+        font-size: 12px;
+    }
+    .footer-social {
+        gap: 16px;
+        flex-wrap: wrap;
+    }
+    .footer-social a {
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+    .order-summary {
+        padding: 20px 24px;
+    }
+    .terms-section {
+        padding: 20px 24px;
+    }
+}
