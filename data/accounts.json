@@ -1,0 +1,37 @@
+[
+  {
+    "id": "AK-001",
+    "title": "اکانت ۱",
+    "description": "نیم سیف",
+    "price": 150000,
+    "images": ["assets/images/accounts/1.jpg"]
+  },
+  {
+    "id": "AK-002",
+    "title": "اکانت ۲",
+    "description": "نیم سیف",
+    "price": 150000,
+    "images": ["assets/images/accounts/2.jpg"]
+  },
+  {
+    "id": "AK-003",
+    "title": "اکانت ۳",
+    "description": "نیم سیف",
+    "price": 200000,
+    "images": ["assets/images/accounts/3.jpg"]
+  },
+  {
+    "id": "AK-004",
+    "title": "اکانت ۴",
+    "description": "نیم سیف",
+    "price": 100000,
+    "images": ["assets/images/accounts/4.jpg"]
+  },
+  {
+    "id": "AK-005",
+    "title": "اکانت ۵",
+    "description": "نیم سیف",
+    "price": 200000,
+    "images": ["assets/images/accounts/5.jpg"]
+  }
+]
