@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>اطلاعات پرداخت - MOON SHOP</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/payment.css" />
+</head>
+<body>
+
+    <header class="site-header" role="banner">
+        <div class="container header-inner">
+            <div class="brand">
+                <div class="monogram" aria-hidden="true">MS</div>
+                <span class="brand-name">MOON SHOP</span>
+            </div>
+            <nav class="nav-desktop" aria-label="منوی اصلی">
+                <ul class="nav-list">
+                    <li><a href="index.html">خانه</a></li>
+                    <li><a href="accounts.html">اکانت‌ها</a></li>
+                    <li><a href="guide.html">راهنمای خرید</a></li>
+                    <li><a href="sell.html" class="nav-cta">فروش اکانت</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="باز کردن منو" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </div>
+        <div class="mobile-drawer" id="mobileDrawer">
+            <div class="drawer-inner">
+                <button class="drawer-close" id="drawerClose">✕</button>
+                <ul class="drawer-nav">
+                    <li><a href="index.html">خانه</a></li>
+                    <li><a href="accounts.html">اکانت‌ها</a></li>
+                    <li><a href="guide.html">راهنمای خرید</a></li>
+                    <li><a href="sell.html">فروش اکانت</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="drawer-overlay" id="drawerOverlay"></div>
+    </header>
+
+    <main class="payment-page">
+        <div class="container">
+            <h1 class="page-title">اطلاعات پرداخت</h1>
+
+            <!-- خلاصه سفارش -->
+            <div class="order-summary" id="paymentOrderSummary">
+                <!-- توسط JS پر می‌شود -->
+            </div>
+
+            <!-- اطلاعات پرداخت -->
+            <div class="payment-info">
+                <div class="info-row">
+                    <span class="info-label">مبلغ:</span>
+                    <span class="info-value" id="totalAmount">۰ تومان</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">شماره کارت:</span>
+                    <span class="info-value" id="cardNumberDisplay">6219861956267685</span>
+                    <button class="btn-copy" id="copyCardBtn">کپی</button>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">آیدی ادمین سروش‌پلاس:</span>
+                    <span class="info-value admin-id" id="adminIdDisplay">@Sjjshh</span>
+                    <button class="btn-copy" id="copyAdminBtn">کپی</button>
+                </div>
+            </div>
+
+            <!-- راهنما -->
+            <div class="payment-guide">
+                <h3>راهنمای تکمیل سفارش</h3>
+                <p>
+                    پس از انجام کارت‌به‌کارت، تصویر فیش واریزی را به همراه مشخصات سفارش (نام اکانت، شناسه سفارش و مبلغ پرداختی)
+                    برای ادمین در سروش‌پلاس (<strong>@Sjjshh</strong>) ارسال نمایید.
+                </p>
+                <p>
+                    پس از بررسی و تأیید پرداخت، اطلاعات اکانت خریداری‌شده برای شما ارسال خواهد شد.
+                </p>
+            </div>
+
+            <!-- دکمه‌ها -->
+            <div class="payment-actions">
+                <a href="index.html" class="btn btn-outline">بازگشت به صفحه اصلی</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <div class="brand">
+                    <div class="monogram" aria-hidden="true">MS</div>
+                    <span class="brand-name">MOON SHOP</span>
+                </div>
+                <p class="footer-tagline">مارکت تخصصی اکانت‌های Call of Duty Mobile</p>
+            </div>
+            <div class="footer-social">
+                <a href="#" aria-label="اینستاگرام">اینستاگرام</a>
+                <a href="#" aria-label="تلگرام">تلگرام</a>
+                <a href="#" aria-label="سروش‌پلاس">سروش‌پلاس</a>
+            </div>
+            <nav class="footer-nav" aria-label="لینک‌های فوتر">
+                <a href="index.html">خانه</a>
+                <a href="accounts.html">اکانت‌ها</a>
+                <a href="guide.html">راهنمای خرید</a>
+                <a href="sell.html">فروش اکانت</a>
+            </nav>
+            <div class="footer-divider" aria-hidden="true"></div>
+            <p class="footer-copy">&copy; ۲۰۲۶ MOON SHOP - تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+
+    <script src="js/config.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/payment.js"></script>
+</body>
+</html>
