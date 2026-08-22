@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MOON SHOP - مارکت تخصصی اکانت‌های Call of Duty Mobile</title>
+    <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="css/admin.css" />
+</head>
+<body>
+
+<!-- اسپلش -->
+<div id="entry-hero" class="entry-hero">
+    <div class="hero-logo-wrapper">
+        <img src="assets/images/moon.png" alt="MOON SHOP" class="hero-logo" />
+    </div>
+    <div class="hero-content">
+        <p class="hero-slogan"><span class="highlight">PLAY HARD</span> · <span class="highlight">SHOP SMART</span> · <span class="highlight">GO LEGEND</span></p>
+        <p class="hero-sub-slogan">اکانت حرفه‌ای، شروع یک بازی متفاوت.</p>
+        <div class="hero-actions">
+            <button id="showHomeBtn" class="btn btn-primary">مشاهده اکانت‌ها</button>
+        </div>
+    </div>
+</div>
+
+<!-- محتوای اصلی -->
+<div id="main-content" class="main-content hidden">
+
+    <header class="site-header" role="banner">
+        <div class="container header-inner">
+            <div class="brand">
+                <div class="monogram" aria-hidden="true">MS</div>
+                <span class="brand-name">MOON SHOP</span>
+            </div>
+            <nav class="nav-desktop" aria-label="منوی اصلی">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="active">خانه</a></li>
+                    <li><a href="accounts.html">اکانت‌ها</a></li>
+                    <li><a href="guide.html">راهنمای خرید</a></li>
+                    <li><a href="sell.html" class="nav-cta">فروش اکانت</a></li>
+                    <li><a href="#" id="adminLoginBtn" class="admin-link">🔒 مدیریت</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger" id="hamburger" aria-label="باز کردن منو" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+            <a href="#" id="adminLoginBtnMobile" class="btn-sell-mobile">مدیریت</a>
+        </div>
+        <div class="mobile-drawer" id="mobileDrawer">
+            <div class="drawer-inner">
+                <button class="drawer-close" id="drawerClose">✕</button>
+                <ul class="drawer-nav">
+                    <li><a href="index.html">خانه</a></li>
+                    <li><a href="accounts.html">اکانت‌ها</a></li>
+                    <li><a href="guide.html">راهنمای خرید</a></li>
+                    <li><a href="sell.html">فروش اکانت</a></li>
+                    <li><a href="#" id="adminLoginBtnMobile2" class="admin-link">🔒 مدیریت</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="drawer-overlay" id="drawerOverlay"></div>
+    </header>
+
+    <!-- بنر اصلی -->
+    <section class="home-banner" id="homeBanner">
+        <div class="home-banner-image">
+            <img src="assets/images/moon.png" alt="MOON SHOP" />
+        </div>
+        <div class="home-banner-overlay"></div>
+        <div class="home-banner-content">
+            <p class="banner-tagline">PLAY HARD · SHOP SMART · GO LEGEND</p>
+        </div>
+    </section>
+
+    <!-- معرفی کوتاه -->
+    <section class="intro-short">
+        <div class="container">
+            <div class="intro-short-content">
+                <h2>MOON SHOP</h2>
+                <p class="intro-tagline">PLAY HARD · SHOP SMART · GO LEGEND</p>
+                <p>اکانت‌های منتخب Call of Duty Mobile با مشخصات شفاف و انتخابی مطمئن.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- دسته‌بندی -->
+    <section class="categories">
+        <div class="container">
+            <ul class="category-tabs" role="tablist">
+                <li role="tab" class="category-tab active" data-filter="all">همه اکانت‌ها</li>
+                <li role="tab" class="category-tab" data-filter="mythic">اسطوره‌ای</li>
+                <li role="tab" class="category-tab" data-filter="legendary">افسانه‌ای</li>
+                <li role="tab" class="category-tab" data-filter="highcp">CP بالا</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- لیست اکانت‌ها -->
+    <section class="accounts" id="accounts-target">
+        <div class="container">
+            <div class="section-header">
+                <h2>اکانت‌های موجود</h2>
+                <span class="accounts-count"><span class="count-number" id="accountCount">۰</span> اکانت</span>
+            </div>
+            <div class="section-divider"></div>
+            <div class="accounts-grid" id="accountsGrid"></div>
+            <div class="accounts-more">
+                <a href="accounts.html" class="btn btn-secondary">مشاهده همه اکانت‌ها</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- معرفی کامل -->
+    <section class="intro">
+        <div class="container">
+            <div class="intro-content">
+                <h2>MOON SHOP | مارکت تخصصی اکانت‌های کالاف دیوتی</h2>
+                <p>به MOON SHOP خوش آمدید؛ یک مارکت تخصصی برای خرید و فروش اکانت‌های کالاف دیوتی با هدف ایجاد یک تجربه ساده، سریع و مطمئن برای گیمرها.</p>
+                <div class="intro-features">
+                    <div class="intro-feature">
+                        <span class="intro-icon">🔐</span>
+                        <div><h3>پرداخت امن</h3><p>پرداخت کارت‌به‌کارت با بررسی رسید.</p></div>
+                    </div>
+                    <div class="intro-feature">
+                        <span class="intro-icon">📦</span>
+                        <div><h3>تحویل سریع</h3><p>پس از تأیید پرداخت، اکانت ارسال می‌شود.</p></div>
+                    </div>
+                    <div class="intro-feature">
+                        <span class="intro-icon">⚡</span>
+                        <div><h3>ساده و حرفه‌ای</h3><p>فرآیند خرید شفاف و سریع.</p></div>
+                    </div>
+                </div>
+                <div class="intro-notice">
+                    <p><strong>توجه:</strong> خرید و فروش اکانت‌ها ممکن است برخلاف قوانین ناشر باشد. MOON SHOP وابسته به Activision نیست.</p>
+                </div>
+                <p class="intro-closing">MOON SHOP — اکانتتو انتخاب کن؛ سفارشتو ثبت کن؛ وارد بازی شو.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- مراحل خرید -->
+    <section class="trust-modern">
+        <div class="container">
+            <h2 class="section-title">چطور خرید کنیم؟</h2>
+            <div class="trust-steps-modern">
+                <div class="trust-step-modern"><span class="step-number-modern">۱</span><h3>انتخاب اکانت</h3><p>از بین اکانت‌ها انتخاب کن.</p></div>
+                <div class="trust-step-modern"><span class="step-number-modern">۲</span><h3>بررسی مشخصات</h3><p>مشخصات را بررسی کن.</p></div>
+                <div class="trust-step-modern"><span class="step-number-modern">۳</span><h3>ثبت سفارش</h3><p>سفارش را ثبت کن.</p></div>
+                <div class="trust-step-modern"><span class="step-number-modern">۴</span><h3>دریافت اکانت</h3><p>پس از پرداخت، اکانت را دریافت کن.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- پشتیبانی -->
+    <section class="support-section" id="support-section">
+        <div class="container">
+            <div class="support-content">
+                <h2>پشتیبانی</h2>
+                <div class="support-info">
+                    <div class="support-item">
+                        <span class="support-label">آیدی سروش‌پلاس:</span>
+                        <span class="support-value" id="supportAdminId">@Sjjshh</span>
+                        <button class="btn-copy-support" onclick="copySupportId('@Sjjshh')">کپی</button>
+                    </div>
+                    <p class="support-text">در صورت هرگونه سؤال، از طریق آیدی بالا با پشتیبانی در ارتباط باشید.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container footer-inner">
+            <div class="footer-brand">
+                <div class="brand"><div class="monogram" aria-hidden="true">MS</div><span class="brand-name">MOON SHOP</span></div>
+                <p class="footer-tagline">مارکت تخصصی اکانت‌های Call of Duty Mobile</p>
+            </div>
+            <div class="footer-social">
+                <a href="#">اینستاگرام</a>
+                <a href="#">تلگرام</a>
+                <a href="#">سروش‌پلاس</a>
+            </div>
+            <nav class="footer-nav">
+                <a href="index.html">خانه</a>
+                <a href="accounts.html">اکانت‌ها</a>
+                <a href="guide.html">راهنمای خرید</a>
+                <a href="sell.html">فروش اکانت</a>
+            </nav>
+            <div class="footer-divider"></div>
+            <p class="footer-copy">&copy; ۲۰۲۶ MOON SHOP - تمامی حقوق محفوظ است.</p>
+        </div>
+    </footer>
+</div>
+
+<!-- مودال جزییات اکانت -->
+<div id="accountModal" class="modal-overlay" role="dialog" aria-modal="true">
+    <div class="modal-container">
+        <button class="modal-close" id="modalClose">✕</button>
+        <div class="modal-gallery" id="modalGallery"></div>
+        <div class="modal-info" id="modalInfo"></div>
+        <div class="modal-actions">
+            <button id="buyDirectBtn" class="btn btn-primary">خرید مستقیم</button>
+        </div>
+    </div>
+</div>
+
+<!-- لایت‌باکس -->
+<div id="lightbox" class="lightbox-overlay">
+    <button class="lightbox-close" id="lightboxClose">✕</button>
+    <img class="lightbox-image" id="lightboxImage" src="" alt="تصویر بزرگ" />
+</div>
+
+<!-- ===== پنل مدیریت (مودال ورود) ===== -->
+<div id="adminLoginModal" class="modal-overlay" role="dialog" aria-modal="true" aria-label="ورود مدیر">
+    <div class="modal-container admin-login-container">
+        <button class="modal-close" id="adminLoginClose" aria-label="بستن">✕</button>
+        <h3>🔒 ورود به پنل مدیریت</h3>
+        <p>کد مدیریت را وارد کنید:</p>
+        <input type="password" id="adminCodeInput" class="admin-code-input" placeholder="کد مدیریت" />
+        <button id="adminCodeSubmit" class="btn btn-primary">تأیید</button>
+        <div id="adminLoginError" class="admin-error"></div>
+    </div>
+</div>
+
+<!-- ===== پنل مدیریت ===== -->
+<div id="adminPanel" class="admin-panel-overlay">
+    <div class="admin-panel">
+        <div class="admin-panel-header">
+            <h2>⚙️ پنل مدیریت</h2>
+            <button id="adminPanelClose" class="admin-panel-close">✕</button>
+        </div>
+        <div class="admin-config">
+            <h3>تنظیمات سایت</h3>
+            <div class="admin-config-row">
+                <label>شماره کارت:</label>
+                <input type="text" id="adminCardNumber" />
+                <button id="adminSaveCard" class="btn btn-primary btn-sm">ذخیره</button>
+            </div>
+            <div class="admin-config-row">
+                <label>آیدی سروش‌پلاس:</label>
+                <input type="text" id="adminSoroushId" />
+                <button id="adminSaveSoroush" class="btn btn-primary btn-sm">ذخیره</button>
+            </div>
+        </div>
+        <div class="admin-accounts">
+            <h3>مدیریت اکانت‌ها</h3>
+            <button id="adminAddAccountBtn" class="btn btn-primary btn-sm">+ افزودن اکانت جدید</button>
+            <div id="adminAccountsList" class="admin-accounts-list"></div>
+        </div>
+        <!-- دکمه ذخیره روی گیت‌هاب توسط JS اضافه می‌شود -->
+    </div>
+</div>
+
+<!-- ===== فرم افزودن/ویرایش اکانت ===== -->
+<div id="adminAccountForm" class="admin-form-overlay">
+    <div class="admin-form">
+        <div class="admin-form-header">
+            <h3 id="adminFormTitle">افزودن اکانت جدید</h3>
+            <button id="adminFormClose" class="admin-form-close">✕</button>
+        </div>
+        <div class="admin-form-body">
+            <input type="hidden" id="adminFormEditId" />
+            <label>آیدی اکانت:</label>
+            <input type="text" id="adminFormId" placeholder="مثلاً AK-007" />
+            <label>عنوان:</label>
+            <input type="text" id="adminFormTitleInput" placeholder="عنوان اکانت" />
+            <label>توضیحات:</label>
+            <input type="text" id="adminFormDescription" placeholder="توضیحات (اختیاری)" />
+            <label>قیمت (تومان):</label>
+            <input type="number" id="adminFormPrice" placeholder="قیمت" />
+            <label>تصویر اصلی:</label>
+            <div class="file-upload-wrapper">
+                <input type="file" id="adminFormFileInput" accept="image/*" />
+                <div class="upload-status" id="adminFormUploadStatus"></div>
+            </div>
+            <input type="text" id="adminFormImage1" placeholder="لینک عکس (به‌طور خودکار پر می‌شود)" />
+            <div class="admin-form-actions">
+                <button class="btn btn-primary" id="adminFormSave">ذخیره</button>
+                <button class="btn btn-secondary" id="adminFormCancel">انصراف</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
