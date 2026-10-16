@@ -254,7 +254,7 @@ function renderAccounts(accounts) {
         return `
             <article class="account-card" data-account-id="${acc.id}">
                 <div class="account-card-image">
-                    <img src="${imgSrc}" alt="${acc.title}" loading="eager" />
+                    <img src="${imgSrc}" alt="${acc.title}" loading="lazy" onerror="this.remove();this.parentElement.classList.add('no-image')" />
                 </div>
                 <div class="account-card-body">
                     <span class="account-card-id">${acc.id}</span>
@@ -573,7 +573,7 @@ if (adminLoginBtnMobile) adminLoginBtnMobile.addEventListener('click', openAdmin
 if (adminLoginClose) adminLoginClose.addEventListener('click', closeAdminLogin);
 if (adminPanelClose) adminPanelClose.addEventListener('click', closeAdminPanel);
 
-adminCodeSubmit.addEventListener('click', async function() {
+if (adminCodeSubmit) adminCodeSubmit.addEventListener('click', async function() {
     const code = adminCodeInput.value.trim();
     if (!code) {
         adminLoginError.textContent = 'لطفاً کد را وارد کنید.';
@@ -611,13 +611,13 @@ adminCodeSubmit.addEventListener('click', async function() {
     openAdminPanel();
 });
 
-adminCodeInput.addEventListener('keydown', function(e) {
+if (adminCodeInput) adminCodeInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') adminCodeSubmit.click();
 });
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
-        if (adminLoginModal.classList.contains('active')) closeAdminLogin();
-        if (adminPanel.classList.contains('active')) closeAdminPanel();
+        if (adminLoginModal && adminLoginModal.classList.contains('active')) closeAdminLogin();
+        if (adminPanel && adminPanel.classList.contains('active')) closeAdminPanel();
     }
 });
 
