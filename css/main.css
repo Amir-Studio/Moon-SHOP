@@ -469,3 +469,6 @@ input::placeholder,textarea::placeholder{color:#66738a!important}
  .account-card-image{height:135px}.footer-inner{align-items:flex-start}
 }
 @media(prefers-reduced-motion:reduce){.account-card,.nav-list a,.btn{transition:none!important}}
+
+.is-disabled[aria-disabled="true"]{opacity:.42;pointer-events:none;filter:saturate(.5)}
+.footer-social span{display:inline-block;color:var(--color-text-muted);font-size:11px;line-height:1.8}
