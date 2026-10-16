@@ -110,5 +110,37 @@
  fetch('data/accounts.json').then(r=>{if(!r.ok)throw new Error('Catalog unavailable');return r.json()}).then(data=>{products=Array.isArray(data)?data:[];render()}).catch(()=>{products=[];grid.replaceChildren();const empty=document.createElement('div');empty.className='empty';empty.textContent='کاتالوگ در دسترس نیست. لطفاً کمی بعد دوباره بررسی کن.';grid.append(empty);count.textContent='خطا در بارگذاری کاتالوگ';});
 })();
 </script>
+
+<!-- AmirStudio brand & contact -->
+<style>
+#amir-studio-contact-footer{direction:rtl;box-sizing:border-box;margin:0;padding:34px 20px 30px;background:#101010;color:#f5f0e6;border-top:1px solid rgba(198,166,107,.28);font-family:inherit}
+#amir-studio-contact-footer *{box-sizing:border-box}
+#amir-studio-contact-footer .as-wrap{max-width:1120px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:26px;flex-wrap:wrap}
+#amir-studio-contact-footer .as-brand{display:flex;flex-direction:column;gap:7px}
+#amir-studio-contact-footer .as-name{font-size:clamp(19px,3vw,26px);font-weight:800;letter-spacing:.02em;color:#e4c58e}
+#amir-studio-contact-footer .as-tag{font-size:12px;line-height:1.9;color:#b9b1a4}
+#amir-studio-contact-footer .as-contact{display:flex;flex-direction:column;gap:9px}
+#amir-studio-contact-footer .as-phone{font-size:clamp(21px,3vw,28px);font-weight:800;letter-spacing:.04em;color:#fff;text-decoration:none;direction:ltr;text-align:right}
+#amir-studio-contact-footer .as-label{font-size:11px;color:#c6a66b}
+#amir-studio-contact-footer .as-channels{display:flex;gap:7px;flex-wrap:wrap}
+#amir-studio-contact-footer .as-channels span{border:1px solid rgba(198,166,107,.28);border-radius:999px;padding:6px 11px;font-size:11px;color:#e5ddcf}
+#amir-studio-contact-footer .as-note{font-size:10px;line-height:1.8;color:#928a7c}
+#amir-studio-contact-footer .as-copy{max-width:1120px;margin:20px auto 0;padding-top:14px;border-top:1px solid rgba(255,255,255,.08);font-size:10px;color:#81796c}
+@media(max-width:600px){#amir-studio-contact-footer .as-wrap{align-items:flex-start;flex-direction:column;gap:20px}#amir-studio-contact-footer .as-phone{font-size:25px}}
+</style>
+<footer id="amir-studio-contact-footer" aria-label="اطلاعات تماس امیر استدیو">
+  <div class="as-wrap">
+    <div class="as-brand"><span class="as-name">AmirStudio</span><span class="as-tag">طراحی و توسعه‌ی تجربه‌های دیجیتال<br>ساخته‌شده با دقت، از ایده تا اجرا</span></div>
+    <div class="as-contact">
+      <span class="as-label">تماس مستقیم با امیر استدیو</span>
+      <a class="as-phone" href="tel:+989025131506" dir="ltr">۰۹۰۲۵۱۳۱۵۰۶</a>
+      <span class="as-label">راه‌های ارتباطی</span>
+      <div class="as-channels"><span>سروش</span><span>واتساپ</span><span>تلگرام</span><span>روبیکا</span></div>
+      <span class="as-note">برای هماهنگی در پیام‌رسان‌ها، از طریق شماره‌ی بالا تماس بگیرید یا پیامک بدهید.</span>
+    </div>
+  </div>
+  <div class="as-copy">© AmirStudio — طراحی و توسعه‌ی وب</div>
+</footer>
+
 </body>
 </html>
