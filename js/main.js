@@ -3,8 +3,7 @@
 // ============================================================
 
 // ===== رمز مدیریت =====
-const ADMIN_PASSWORD = null;
-const ADMIN_SECRET = null; // احراز هویت باید فقط سمت سرور انجام شود
+const ADMIN_PASSWORD = null; // پنل مدیریت تا اتصال به بک‌اند امن غیرفعال است
 
 // ===== استفاده از LocalWorker =====
 const USE_LOCAL_WORKER = true;
@@ -134,9 +133,7 @@ async function handleUploadImage(imageData, fileName) {
 async function localApiRequest(method, path, body = null) {
     try {
         if (path === '/api/admin/login') {
-            const { code } = body;
-            if (code === ADMIN_SECRET) return { success: true, token: 'local-token-' + Date.now() };
-            return { success: false, error: 'Invalid admin code' };
+            return { success: false, error: 'احراز هویت مدیریت باید سمت سرور انجام شود.' };
         }
         if (path === '/api/upload' && method === 'POST') {
             const { image, fileName } = body;
