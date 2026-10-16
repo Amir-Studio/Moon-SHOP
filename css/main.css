@@ -405,3 +405,67 @@ h1,h2,h3,.brand-name,.hero-slogan,.intro-tagline,.gang-text {
     .modal-actions { flex-direction:column; }
     .modal-actions .btn { min-width:auto; }
 }
+/* ===== MOON SHOP premium storefront system ===== */
+:root{
+ --color-bg:#080a11;--color-bg-secondary:#10141f;--color-bg-surface:#151b29;
+ --color-text-primary:#f2f5fb;--color-text-secondary:#9ca6b8;--color-text-muted:#657087;
+ --color-red:#8b5cf6;--color-red-hover:#7c3aed;--color-red-subtle:rgba(139,92,246,.12);
+ --color-blue:#6ea8ff;--color-blue-hover:#4d91f4;--color-blue-subtle:rgba(110,168,255,.12);
+ --color-accent:#8b5cf6;--color-accent-hover:#7c3aed;--color-accent-glow:rgba(139,92,246,.14);
+ --color-accent-subtle:rgba(139,92,246,.06);--color-border:rgba(255,255,255,.09);
+ --color-header-bg:#080b13;--color-border-gold:rgba(110,168,255,.18);--color-border-gold-hover:rgba(110,168,255,.42);
+ --color-status-available:#9ce4bf;--color-status-sold:#e87991;
+}
+body{background-color:var(--color-bg);background-image:radial-gradient(ellipse at 85% 0%,rgba(47,77,133,.12),transparent 38%);background-attachment:fixed}
+.site-header{background:rgba(8,10,17,.88);backdrop-filter:blur(18px);border-bottom:1px solid var(--color-border);box-shadow:0 8px 35px rgba(0,0,0,.18)}
+.header-inner{min-height:76px}
+.brand-name{font-family:'Oswald','Vazirmatn',sans-serif;letter-spacing:1.4px;font-size:16px}
+.monogram{background:linear-gradient(145deg,#6ea8ff20,#8b5cf620);border:1px solid #6ea8ff40;color:#b9d6ff;border-radius:8px}
+.nav-list{gap:9px}
+.nav-list a{font-size:12px;padding:10px 13px;border-radius:7px;transition:background .2s,color .2s,border-color .2s}
+.nav-list a:hover,.nav-list a.active{background:#6ea8ff12;color:#cfe2ff}
+.nav-list .nav-cta{border:1px solid #6ea8ff40;background:#6ea8ff0a}
+.accounts-page,.guide-page,.sell-page{background:transparent;min-height:72vh;padding-top:42px;padding-bottom:68px}
+.page-title{font-family:'Vazirmatn',sans-serif;font-size:clamp(25px,4vw,35px);font-weight:700;letter-spacing:-.04em;text-align:right;line-height:1.7;margin-bottom:25px}
+.section-header h2{font-family:'Vazirmatn',sans-serif;font-size:21px;font-weight:600}
+.section-divider{background:linear-gradient(90deg,transparent,#6ea8ff50,transparent);height:1px;margin-bottom:24px}
+.accounts-grid{gap:16px}
+.account-card{background:linear-gradient(155deg,#121827,#0e121c 75%);border:1px solid var(--color-border);border-radius:12px;overflow:hidden;transition:transform .25s,border-color .25s,box-shadow .25s}
+.account-card:hover{transform:translateY(-4px);border-color:#6ea8ff50;box-shadow:0 18px 42px #0004}
+.account-card-image{height:155px;background:radial-gradient(ellipse at 75% 25%,#203858,#111827 60%,#0b0e15);display:grid;place-items:center}
+.account-card-image.no-image:before{content:"CALL OF DUTY MOBILE";font:700 12px 'Oswald','Vazirmatn',sans-serif;letter-spacing:.16em;color:#7fa7da;border:1px solid #6ea8ff35;padding:11px 14px;background:#080b1280}
+.account-card-image img{width:100%;height:100%;object-fit:cover}
+.account-card-body{padding:19px;gap:7px}
+.account-card-id{font:9px 'Oswald','Vazirmatn',sans-serif;letter-spacing:.12em;color:#6ea8ff}
+.account-card-title{font-family:'Vazirmatn',sans-serif;font-size:16px;font-weight:600}
+.account-card-description{color:var(--color-text-secondary);font-size:12px}
+.account-card-price{font-family:'Vazirmatn',sans-serif;font-size:19px;font-weight:700;color:#b9d6ff;margin:8px 0}
+.btn{border-radius:7px}
+.btn-primary{background:linear-gradient(110deg,#6ea8ff,#8b9dff);color:#080d16;border-color:transparent}
+.btn-primary:hover,.btn-primary:focus-visible{background:linear-gradient(110deg,#8bbaff,#b2a0ff);border-color:transparent;box-shadow:0 8px 25px #6ea8ff20}
+.guide-content,.sell-content{background:linear-gradient(150deg,#121827,#0e121c 75%);border:1px solid var(--color-border);border-radius:12px;box-shadow:0 20px 65px #0002}
+.guide-content{max-width:900px;padding:clamp(22px,4vw,38px)}
+.guide-content .intro-text{color:#d3dfef}
+.guide-feature{border-bottom:1px solid var(--color-border)}
+.guide-icon{color:#9ac4ff}
+.guide-notice{background:#e8c27b08;border:1px solid #e8c27b25;border-radius:8px}
+.guide-closing{color:#c9dcf7}
+.sell-content{padding:clamp(24px,5vw,44px);text-align:right}
+.sell-content p{font-size:14px;line-height:2.2}
+.support-info-sell{justify-content:flex-start;gap:14px;padding:16px;border:1px solid var(--color-border);background:#080b12;border-radius:8px}
+.support-label{color:var(--color-text-secondary);font-size:12px}
+.support-value{font-family:'Oswald','Vazirmatn',sans-serif;font-size:15px;color:#cfe2ff;direction:ltr}
+.site-footer{border-top:1px solid var(--color-border);background:#080a11a8}
+.footer-inner{gap:25px}
+.footer-tagline,.footer-copy{color:#738097}
+.footer-social a,.footer-nav a{font-size:11px;color:#9ba8bd;transition:color .2s}
+.footer-social a:hover,.footer-nav a:hover{color:#b9d6ff}
+.modal,.account-modal,.admin-panel{background:#101624;border:1px solid #6ea8ff38;box-shadow:0 28px 100px #0009}
+input,select,textarea{border-color:var(--color-border)!important;background:#090c13!important;color:var(--color-text-primary)!important}
+input::placeholder,textarea::placeholder{color:#66738a!important}
+@media(max-width:760px){
+ .header-inner{min-height:66px}.nav-list a{padding:8px 9px;font-size:11px}
+ .page-title{text-align:right}.accounts-page,.guide-page,.sell-page{padding-top:28px}
+ .account-card-image{height:135px}.footer-inner{align-items:flex-start}
+}
+@media(prefers-reduced-motion:reduce){.account-card,.nav-list a,.btn{transition:none!important}}
