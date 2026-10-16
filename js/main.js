@@ -593,7 +593,7 @@ adminCodeSubmit.addEventListener('click', async function() {
         return;
     }
     try {
-        const response = await apiRequest('POST', '/api/admin/login', { code: ADMIN_SECRET });
+        const response = await apiRequest('POST', '/api/admin/login', { code });
         const result = await response.json();
         if (result.success && result.token) {
             adminToken = result.token;
