@@ -3,8 +3,8 @@
 // ============================================================
 
 // ===== رمز مدیریت =====
-const ADMIN_PASSWORD = 'moon123';
-const ADMIN_SECRET = 'moon-secret';
+const ADMIN_PASSWORD = null;
+const ADMIN_SECRET = null; // احراز هویت باید فقط سمت سرور انجام شود
 
 // ===== استفاده از LocalWorker =====
 const USE_LOCAL_WORKER = true;
@@ -12,7 +12,6 @@ const USE_LOCAL_WORKER = true;
 // ============================================================
 // LocalWorker (با مدیریت خطا و retry)
 // ============================================================
-const GITHUB_TOKEN = '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';
 const REPO_OWNER = 'Amir-Studio';
 const REPO_NAME = 'Moon-SHOP'; // ✅ اسم مخزن درست
 const BRANCH = 'main';
@@ -44,55 +43,18 @@ async function fetchWithRetry(url, options, retries = MAX_RETRIES) {
 }
 
 async function getFileContentString(path) {
-    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}?ref=${BRANCH}`;
-    const response = await fetchWithRetry(url, {
-        headers: {
-            'Authorization': `Bearer ${GITHUB_TOKEN}`,
-            'Accept': 'application/vnd.github.v3+json'
-        }
-    });
+    // داده‌های عمومی فقط خوانده می‌شوند؛ هیچ توکن خصوصی در مرورگر قرار نمی‌گیرد.
+    const safePath = path.split('/').map(encodeURIComponent).join('/');
+    const url = `https://raw.githubusercontent.com/${REPO_OWNER}/${REPO_NAME}/${BRANCH}/${safePath}`;
+    const response = await fetchWithRetry(url, { headers: { 'Accept': 'text/plain' } });
     if (response.status === 404) return null;
-    if (!response.ok) {
-        const error = await response.text();
-        throw new Error(`GitHub API error (${response.status}): ${error}`);
-    }
-    const data = await response.json();
-    return decodeURIComponent(escape(atob(data.content)));
+    if (!response.ok) throw new Error(`Public file request failed (${response.status})`);
+    return await response.text();
 }
 
 async function updateFileContent(path, content) {
-    const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`;
-    const existing = await fetchWithRetry(url, {
-        headers: {
-            'Authorization': `Bearer ${GITHUB_TOKEN}`,
-            'Accept': 'application/vnd.github.v3+json'
-        }
-    });
-    let sha = null;
-    if (existing.ok) {
-        const data = await existing.json();
-        sha = data.sha;
-    }
-    const body = {
-        message: `Update ${path}`,
-        content: btoa(unescape(encodeURIComponent(content))),
-        branch: BRANCH
-    };
-    if (sha) body.sha = sha;
-    const response = await fetchWithRetry(url, {
-        method: 'PUT',
-        headers: {
-            'Authorization': `Bearer ${GITHUB_TOKEN}`,
-            'Accept': 'application/vnd.github.v3+json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(body)
-    });
-    if (!response.ok) {
-        const error = await response.text();
-        throw new Error(`GitHub API error (${response.status}): ${error}`);
-    }
-    return await response.json();
+    // GitHub writes from a public browser would expose credentials. Use a protected backend instead.
+    throw new Error('ذخیره‌سازی دائمی از پنل مرورگر غیرفعال است؛ اتصال امن سمت سرور لازم است.');
 }
 
 // ============================================================
@@ -166,33 +128,7 @@ async function handleUpdateConfig(config) {
 }
 
 async function handleUploadImage(imageData, fileName) {
-    try {
-        const sizeInBytes = Math.ceil((imageData.length * 3) / 4);
-        if (sizeInBytes > 100 * 1024 * 1024) throw new Error('Image size exceeds 100 MB limit.');
-        const timestamp = Date.now();
-        const ext = fileName.includes('.') ? fileName.split('.').pop() : 'jpg';
-        const cleanFileName = fileName.replace(/\.[^.]+$/, '').replace(/[^a-zA-Z0-9\-_]/g, '_');
-        const newFileName = `${cleanFileName}_${timestamp}.${ext}`;
-        const path = `assets/images/accounts/${newFileName}`;
-        const url = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${path}`;
-        const body = { message: `Upload image: ${newFileName}`, content: imageData, branch: BRANCH };
-        const response = await fetchWithRetry(url, {
-            method: 'PUT',
-            headers: {
-                'Authorization': `Bearer ${GITHUB_TOKEN}`,
-                'Accept': 'application/vnd.github.v3+json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-        });
-        if (!response.ok) {
-            const error = await response.text();
-            throw new Error(`GitHub API error (${response.status}): ${error}`);
-        }
-        return { success: true, path: `assets/images/accounts/${newFileName}` };
-    } catch (e) {
-        return { success: false, error: e.message };
-    }
+    return { success: false, error: 'آپلود از پنل عمومی غیرفعال است؛ برای امنیت باید از API سمت سرور استفاده شود.' };
 }
 
 async function localApiRequest(method, path, body = null) {
@@ -644,6 +580,11 @@ adminCodeSubmit.addEventListener('click', async function() {
     const code = adminCodeInput.value.trim();
     if (!code) {
         adminLoginError.textContent = 'لطفاً کد را وارد کنید.';
+        adminLoginError.classList.add('show');
+        return;
+    }
+    if (!ADMIN_PASSWORD) {
+        adminLoginError.textContent = 'پنل مدیریت تا اتصال به احراز هویت امن سمت سرور غیرفعال است.';
         adminLoginError.classList.add('show');
         return;
     }
