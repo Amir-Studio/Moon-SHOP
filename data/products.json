@@ -9,7 +9,7 @@
     "usd": 15.89,
     "sourceName": "Target · Anker 30W",
     "sourceUrl": "https://www.target.com/p/-/A-94682222",
-    "imageUrl": "https://cdn.shopify.com/s/files/1/0573/0979/0291/files/10001_77c66b71-ab59-442d-8f94-85a2b5eac3b5.png?v=1694143671"
+    "imageUrl": "https://www.pixelzones.com/cdn/shop/files/az__06988.webp?v=1759421102&width=1445"
   },
   {
     "id": 2,
@@ -19,9 +19,9 @@
     "symbol": "100W",
     "description": "کابل مقاوم USB‑C به USB‑C با پشتیبانی شارژ تا 100 وات؛ مرجع قیمت مدل UGREEN.",
     "usd": 9.99,
-    "sourceName": "Micro Center · UGREEN 100W 2M",
-    "sourceUrl": "https://www.microcenter.com/search/search_results.aspx?Ntt=UGreen+USB+Type-C+to+USB+Type-C+Braided+Cable+100W+2M",
-    "imageUrl": "https://www.atlantia.ca/cdn/shop/collections/Screen_Shot_2022-03-29_at_1.20.51_PM_1024x.png?v=1648585262"
+    "sourceName": "Officeworks · UGREEN 100W cable",
+    "sourceUrl": "https://www.officeworks.com.au/shop/officeworks/p/ugreen-usb-c-to-usb-c-5a-100w-braided-cable-2m-space-grey-ugrc2mgy",
+    "imageUrl": "https://s3-ap-southeast-2.amazonaws.com/wc-prod-pim/JPEG_1000x1000/UGRC2MGY_ugreen_usb_c_to_usb_c_5a_100w_braided_cable_2m_space_grey.jpg"
   },
   {
     "id": 3,
@@ -31,9 +31,9 @@
     "symbol": "20K",
     "description": "پاوربانک پرظرفیت با شارژ سریع؛ مرجع قیمت مدل Anker 20,000mAh 30W.",
     "usd": 49.99,
-    "sourceName": "Target · Anker 20,000mAh 30W",
-    "sourceUrl": "https://www.target.com/s/anker%2Bwireless%2Bkeyboard",
-    "imageUrl": "https://gadgetsin.com/uploads/2019/08/zmi_powerpack_20000_portable_power_bank_and_usbc_hub_2.jpg"
+    "sourceName": "Ryans · Anker PowerCore 20,000mAh",
+    "sourceUrl": "https://www.ryans.com/anker-powercore-20000mah-30w-power-bank",
+    "imageUrl": "https://www.ryans.com/storage/products/main/anker-powercore-20000mah-black-30w-power-bank-11745758871.webp"
   },
   {
     "id": 4,
@@ -43,9 +43,9 @@
     "symbol": "MOUSE",
     "description": "ماوس بی‌سیم روزمره با طراحی ارگونومیک؛ مرجع قیمت مدل Anker 2.4G.",
     "usd": 15,
-    "sourceName": "Target · Anker Wireless Mouse",
-    "sourceUrl": "https://www.target.com/s/anker%2Bwireless%2Bkeyboard",
-    "imageUrl": "https://philong.com.vn/media/product/33720-ban-phim-khong-day-satechi-slim-x2-mau-den-xam-st-btsx2m-philong--1-.jpg"
+    "sourceName": "Back Market · Anker ergonomic mouse",
+    "sourceUrl": "https://www.backmarket.com/en-us/p/anker-a7852m-mouse-wireless/dbd54df2-a032-4d0c-a566-88e57f03c00f",
+    "imageUrl": "https://d2e6ccujb3mkqf.cloudfront.net/dbd54df2-a032-4d0c-a566-88e57f03c00f-3_4855718f-8a22-45d5-b60e-bf6f7f629c0a.jpg"
   },
   {
     "id": 5,
@@ -57,7 +57,7 @@
     "usd": 29.99,
     "sourceName": "B&H · Logitech MK270",
     "sourceUrl": "https://www.bhphotovideo.com/c/buy/mice-keyboard-kits/ci/27331",
-    "imageUrl": "https://philong.com.vn/media/product/33720-ban-phim-khong-day-satechi-slim-x2-mau-den-xam-st-btsx2m-philong--1-.jpg"
+    "imageUrl": "https://i5.walmartimages.ca/asr/9bca57e3-d057-418a-bd40-f2f4447f460d.0f204f07b56a804764572f875360d50a.jpeg?odnBg=FFFFFF&odnHeight=2000&odnWidth=2000"
   },
   {
     "id": 6,
@@ -67,8 +67,8 @@
     "symbol": "6-in-1",
     "description": "هاب چندمنظوره USB‑C برای گسترش درگاه‌های لپ‌تاپ؛ مرجع قیمت UNITEK uHub H6+.",
     "usd": 24.99,
-    "sourceName": "UNITEK · uHub H6+",
-    "sourceUrl": "https://www.unitek-products.com/collections/back-to-school-2026",
-    "imageUrl": "https://alogic.in/cdn/shop/products/media-88314.jpg?v=1688016989&width=1000"
+    "sourceName": "UNITEK · uHUB 6-in-1",
+    "sourceUrl": "https://www.unitek-hk.com/products/uhub-p5-6-in-1-usb-c-hub-with-hdmi-and-dual-card-reader",
+    "imageUrl": "https://www.unitek-hk.com/cdn/shop/products/H1107F_01_Front_Updated_1024x1024_2x_f7e9c2c7-828c-4675-af73-15fd6387112b.jpg?v=1642563524"
   }
 ]
