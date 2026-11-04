@@ -112,7 +112,7 @@
     render();
   }));
   search.addEventListener('input',render);sort.addEventListener('change',render);
-  cartButton.addEventListener('click',()=>cartDrawer.classList.add('open'));
+  cartButton.addEventListener('click',e=>{e.preventDefault();cartDrawer.classList.add('open')});
   cartClose.addEventListener('click',()=>cartDrawer.classList.remove('open'));
   cartDrawer.addEventListener('click',e=>{if(e.target===cartDrawer)cartDrawer.classList.remove('open')});
   menuToggle.addEventListener('click',()=>{const open=nav.classList.toggle('open');menuToggle.setAttribute('aria-expanded',String(open));});
