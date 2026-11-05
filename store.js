@@ -269,7 +269,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     })).filter(p => p.currency === 'TOMAN');
 
     rateValue.textContent = fa(products.length) + ' کالا';
-    rateStamp.textContent = 'کاتالوگ زنده از Supabase';
+    if (rateStamp) rateStamp.textContent = 'کاتالوگ زنده از Supabase';
     setConnection(true, 'پایگاه داده متصل است');
     render();
     renderCart();
@@ -363,6 +363,13 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     $('totalCount').textContent = fa(adminProducts.length);
     $('activeCount').textContent = fa(adminProducts.filter(p=>p.is_active).length);
     $('stockCount').textContent = fa(adminProducts.reduce((sum,p)=>sum+Number(p.stock||0),0));
+    const lowStock = adminProducts.filter(p => Number(p.stock || 0) > 0 && Number(p.stock) <= 5);
+    const outOfStock = adminProducts.filter(p => Number(p.stock || 0) === 0);
+    $('lowStockCount').textContent = fa(lowStock.length + outOfStock.length);
+    $('lowStockList').textContent = outOfStock.length
+      ? 'ناموجود: ' + outOfStock.slice(0,3).map(p=>p.name).join('، ')
+      : lowStock.length ? 'رو به اتمام: ' + lowStock.slice(0,3).map(p=>p.name).join('، ')
+      : 'در حال حاضر هشدار موجودی ثبت نشده است.';
     renderAdminProducts();
     note(workspaceMessage,'اطلاعات به‌روز شد.',true);
   }
@@ -406,6 +413,13 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
   modal.addEventListener('click',event=>{if(event.target===modal)closeEditor();});
   $('adminSearchInput').addEventListener('input',renderAdminProducts);
   $('refreshButton').addEventListener('click',loadAdminProducts);
+  document.querySelectorAll('[data-admin-tab]').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const selected = tab.dataset.adminTab;
+      document.querySelectorAll('[data-admin-tab]').forEach(item => item.classList.toggle('active', item === tab));
+      document.querySelectorAll('[data-admin-panel]').forEach(panel => panel.classList.toggle('hidden', panel.dataset.adminPanel !== selected));
+    });
+  });
   productForm.addEventListener('submit',async event=>{
     event.preventDefault();
     const id=$('productId').value;
