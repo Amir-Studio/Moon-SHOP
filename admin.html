@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#090a0d">
+  <title>مدیریت فروشگاه | MOON SHOP</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="index.html"><span class="brand-mark">M</span><span>MOON <b>SHOP</b><small>CONTROL CENTER</small></span></a>
+    <a class="back-link" href="index.html">مشاهده فروشگاه ↗</a>
+  </header>
+  <main class="shell">
+    <section class="login-card" id="loginView">
+      <div class="eyebrow">PRIVATE ACCESS / 01</div>
+      <div class="moon-symbol">M</div>
+      <h1>ورود به پنل مدیریت</h1>
+      <p>برای مدیریت محصولات فروشگاه، با حساب مدیر وارد شوید.</p>
+      <form id="loginForm">
+        <label for="email">ایمیل مدیر</label>
+        <input id="email" type="email" autocomplete="username" placeholder="admin@example.com" required>
+        <label for="password">رمز عبور</label>
+        <input id="password" type="password" autocomplete="current-password" placeholder="رمز عبور حساب" required>
+        <button class="button primary full" id="loginButton" type="submit">ورود امن <span>←</span></button>
+      </form>
+      <div class="notice" id="loginMessage" role="status"></div>
+      <div class="login-foot"><span class="lock">▣</span> دسترسی فقط برای حساب‌های تأییدشده مدیر</div>
+    </section>
+
+    <section class="workspace hidden" id="adminView">
+      <aside class="sidebar">
+        <div class="side-label">WORKSPACE</div>
+        <div class="side-active"><span>▦</span> محصولات</div>
+        <a class="side-link" href="index.html"><span>↗</span> مشاهده فروشگاه</a>
+        <div class="side-bottom"><span class="status-dot"></span> اتصال امن به Supabase</div>
+      </aside>
+      <section class="main-panel">
+        <div class="page-head">
+          <div><div class="eyebrow">MOON / MANAGEMENT</div><h1>مدیریت محصولات</h1><p>کاتالوگ فروشگاه را مستقیماً از اینجا کنترل کنید.</p></div>
+          <button class="button ghost" id="logoutButton">خروج از حساب</button>
+        </div>
+        <div class="stats">
+          <article class="stat-card"><span>کل محصولات</span><strong id="totalCount">—</strong><small>ثبت‌شده در پایگاه داده</small></article>
+          <article class="stat-card"><span>محصولات فعال</span><strong id="activeCount">—</strong><small>قابل نمایش در فروشگاه</small></article>
+          <article class="stat-card"><span>موجودی کل</span><strong id="stockCount">—</strong><small>مجموع تعداد کالاها</small></article>
+        </div>
+        <div class="toolbar">
+          <div><h2>فهرست محصولات</h2><p>قیمت و موجودی پس از ذخیره، در فروشگاه به‌روزرسانی می‌شوند.</p></div>
+          <button class="button primary" id="addButton">＋ افزودن محصول</button>
+        </div>
+        <div class="search-row"><input id="searchInput" type="search" placeholder="جست‌وجوی نام محصول…"><button class="button ghost" id="refreshButton">↻ بروزرسانی</button></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>محصول</th><th>دسته‌بندی</th><th>قیمت</th><th>موجودی</th><th>وضعیت</th><th>عملیات</th></tr></thead><tbody id="productsBody"><tr><td colspan="6" class="empty-cell">در حال دریافت محصولات…</td></tr></tbody></table>
+        </div>
+        <div class="notice workspace-message" id="workspaceMessage" role="status"></div>
+        <div class="security-note"><span>✦</span><div><b>یادآوری امنیتی</b><p>این پنل فقط با حسابی کار می‌کند که شناسه‌اش در جدول مدیران Supabase ثبت شده باشد. کلید محرمانه یا service_role هرگز نباید در این صفحه قرار بگیرد.</p></div></div>
+      </section>
+    </section>
+  </main>
+
+  <div class="modal hidden" id="productModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-card">
+      <div class="modal-head"><div><div class="eyebrow">PRODUCT / EDITOR</div><h2 id="modalTitle">افزودن محصول</h2></div><button class="icon-button" id="closeModal" aria-label="بستن">×</button></div>
+      <form id="productForm" class="product-form">
+        <input id="productId" type="hidden">
+        <div class="field"><label for="productName">نام محصول *</label><input id="productName" maxlength="120" required></div>
+        <div class="field"><label for="productDescription">توضیحات</label><textarea id="productDescription" rows="3" maxlength="500"></textarea></div>
+        <div class="form-grid">
+          <div class="field"><label for="productPrice">قیمت (تومان) *</label><input id="productPrice" type="number" min="0" step="1" required></div>
+          <div class="field"><label for="productStock">موجودی *</label><input id="productStock" type="number" min="0" step="1" required></div>
+        </div>
+        <div class="field"><label for="productImage">لینک تصویر (URL)</label><input id="productImage" type="url" placeholder="https://example.com/image.webp"></div>
+        <div class="form-grid">
+          <div class="field"><label for="productCategory">دسته‌بندی</label><select id="productCategory"><option value="charging">شارژ و برق</option><option value="peripherals">لوازم جانبی</option><option value="connectivity">اتصال و تبدیل</option><option value="other">سایر</option></select></div>
+          <div class="field"><label for="productSymbol">نشان کوتاه</label><input id="productSymbol" maxlength="12" placeholder="MOON"></div>
+        </div>
+        <label class="toggle-row"><input id="productActive" type="checkbox" checked><span>محصول در فروشگاه فعال باشد</span></label>
+        <div class="form-actions"><button class="button primary" id="saveButton" type="submit">ذخیره محصول</button><button class="button ghost" id="cancelButton" type="button">انصراف</button></div>
+        <div class="notice" id="formMessage" role="status"></div>
+      </form>
+    </div>
+  </div>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
