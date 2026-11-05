@@ -109,3 +109,47 @@ body{background:radial-gradient(ellipse at 85% -15%,#dce5ee 0,transparent 35%),#
 .modal{position:fixed;inset:0;z-index:90;background:#101722a8;display:grid;place-items:center;padding:16px}.modal-card{width:min(560px,100%);max-height:92vh;overflow:auto;padding:23px;background:#fff;border:1px solid #e4e0d7;border-radius:13px;box-shadow:0 25px 80px #0003}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.modal-head h3{margin:5px 0 0}.modal-card form{display:grid;gap:12px}.modal-card label{display:grid;gap:6px}.modal-card textarea{resize:vertical}.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}.check-label{display:flex!important;align-items:center;gap:8px}.check-label input{width:auto}.form-actions{display:flex;gap:8px}.form-actions .btn{flex:1}
 @media(max-width:850px){.hero{grid-template-columns:1fr;gap:32px}.hero-showcase{min-height:350px}.product-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.category-tiles{grid-template-columns:repeat(2,1fr)}.section-heading{align-items:start;flex-direction:column}.about-grid{grid-template-columns:1fr;gap:22px}}
 @media(max-width:580px){.wrap{width:calc(100% - 30px)}.announcement-inner{font-size:8px}.header-inner{height:70px}.menu-toggle{display:flex;flex-direction:column;justify-content:center;gap:4px;padding:9px}.menu-toggle span{height:2px;width:17px;background:#293b55}.nav{display:none;position:absolute;top:70px;right:0;left:0;background:#f7f6f2;padding:12px 20px 18px;flex-direction:column;align-items:stretch;gap:0;border-bottom:1px solid #e2ded6;box-shadow:0 14px 20px #202b3a12}.nav.open{display:flex}.nav a{padding:12px 0;border-bottom:1px solid #e9e5dd}.header-actions{gap:5px}.account-link{display:none}.cart-trigger{padding:9px;font-size:9px}.hero{padding:43px 0 35px}.hero h1{font-size:43px}.hero-showcase{min-height:310px;padding:16px}.showcase-images{inset:48px 12px 42px}.showcase-card{height:72%;width:46%}.showcase-stamp{width:94px;height:94px}.showcase-stamp b{font-size:16px}.benefits-grid{grid-template-columns:1fr}.benefits-grid>div{border-left:0;border-bottom:1px solid #ddd9d0;padding:13px 15px}.benefits-grid>div:last-child{border:0}.section{padding-top:55px;padding-bottom:52px}.section-heading h2,.about-grid h2{font-size:29px}.category-tiles{gap:8px}.category-tile{min-height:135px;padding:15px}.shop-section{padding:54px 0}.shop-toolbar{flex-direction:column}.search-box,.shop-toolbar select{width:100%;height:45px}.active-filters{align-items:flex-start;flex-direction:column}.product-grid{grid-template-columns:1fr}.product-visual{height:235px}.school-card{padding:25px 20px}.school-art{width:90px;height:90px;flex-shrink:0}.school-art span{font-size:27px}.school-art small{font-size:6px}.school-card h2{font-size:22px}.school-card p{font-size:9px}.management-section{padding:54px 0}.admin-login,.admin-workspace{padding:18px}.admin-toolbar{align-items:flex-start;flex-direction:column}.admin-stats{gap:6px}.admin-stats>div{padding:10px}.admin-stats b{font-size:19px}.admin-toolbar .btn{padding:9px 12px}.footer-main{align-items:flex-start;flex-direction:column}.footer-nav{flex-wrap:wrap}.footer-bottom{flex-direction:column}.form-row{grid-template-columns:1fr}.cart-panel{border-radius:0;width:100%}}
+
+
+/* Shopping guide */
+.help-section{padding:72px 0;background:#fff;border-block:1px solid #e9e5dd}
+.help-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.help-grid article{padding:22px;background:#f7f6f2;border:1px solid #e7e3da;border-radius:11px}
+.help-grid b{font-size:13px;color:#283647}.help-grid p{font-size:10px;color:#777b80;line-height:2.1;margin:9px 0 0}
+/* Admin dashboard navigation and future modules */
+.admin-workspace{width:100%;max-width:1100px}
+.admin-shell{display:grid;grid-template-columns:205px minmax(0,1fr);gap:15px;align-items:start}
+.admin-sidebar{display:flex;flex-direction:column;gap:5px;padding:10px;background:#f7f5f0;border:1px solid #e9e5dd;border-radius:10px;position:sticky;top:15px}
+.admin-tab{display:flex;justify-content:space-between;align-items:center;width:100%;padding:11px 12px;border:1px solid transparent;border-radius:7px;background:transparent;color:#646a71;text-align:right;font:10px var(--sans);cursor:pointer}
+.admin-tab span{font-size:14px;color:#9a8a70}
+.admin-tab:hover{background:#eeece6}
+.admin-tab.active{background:#253449;color:#fff;border-color:#253449}
+.admin-tab.active span{color:#e4c99b}
+.admin-main{min-width:0;padding:18px;background:#fff;border:1px solid #e9e5dd;border-radius:10px}
+.admin-panel{min-height:330px}
+.panel-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:15px;border-bottom:1px solid #eeeae3;margin-bottom:17px}
+.panel-heading h3{font-size:16px;margin:5px 0 0;color:#26313e}
+.panel-state{padding:6px 10px;border-radius:20px;background:#edf3ef;color:#588064;font-size:9px;white-space:nowrap}
+.overview-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.overview-grid article{padding:16px;background:#f8f7f3;border:1px solid #ece8df;border-radius:9px}
+.overview-grid small{display:block;color:#85847f;font-size:9px}
+.overview-grid b{display:block;color:#283b51;font-size:14px;margin-top:9px}
+.overview-grid p{font-size:9px;color:#85847f;line-height:2;margin:6px 0 0}
+.module-note{margin-top:17px;padding:16px 18px;background:#f5f3ed;border-right:3px solid #b18a50;border-radius:7px}
+.module-note b{font-size:11px;color:#354457}
+.module-note p{font-size:9px;line-height:2.1;color:#777b80;margin:6px 0 0}
+.module-placeholder{min-height:260px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:25px}
+.module-icon{width:48px;height:48px;border-radius:13px;background:#f1eee7;color:#9b7b4e;display:grid;place-items:center;font-size:22px}
+.module-placeholder h4{font-size:15px;color:#29384b;margin:15px 0 7px}
+.module-placeholder>p{max-width:460px;font-size:10px;color:#777b80;line-height:2}
+.module-placeholder>small{font:9px var(--mono);color:#9a805b;background:#f7f5f0;padding:7px 10px;border-radius:5px}
+.module-placeholder .module-note{width:100%;text-align:right;max-width:520px}
+.admin-panel .admin-search{margin:0 0 12px}
+@media(max-width:760px){
+ .help-grid{grid-template-columns:1fr}
+ .admin-shell{grid-template-columns:1fr}
+ .admin-sidebar{position:static;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px}
+ .admin-tab{font-size:9px;padding:10px 8px}
+ .admin-main{padding:12px}
+ .overview-grid{grid-template-columns:1fr}
+}
