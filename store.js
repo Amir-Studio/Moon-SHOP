@@ -69,10 +69,11 @@
     const irr = document.createElement('b'); irr.dataset.usd=p.usd; irr.textContent=usdRate ? money(roundToman(p.usd*usdRate)) : 'فعلاً نامشخص';
     const irrSmall = document.createElement('small'); irrSmall.textContent='معادل تقریبی با نرخ زنده';
     irrWrap.append(irr,irrSmall); price.append(usd,irrWrap);
+    const stock = document.createElement('small'); stock.className='product-stock'; stock.textContent = Number(p.stock || 0) > 0 ? 'موجودی آزمایشی: ' + fa(p.stock) + ' عدد' : 'ناموجود';
     const foot = document.createElement('div'); foot.className='product-foot';
     const source = document.createElement('a'); source.className='source-link'; source.href=p.sourceUrl; source.target='_blank'; source.rel='noopener noreferrer'; source.textContent='بررسی مرجع قیمت ↗';
-    const add = document.createElement('button'); add.className='btn primary'; add.type='button'; add.textContent='افزودن به سبد +'; add.addEventListener('click',()=>addToCart(p.id));
-    foot.append(source,add); body.append(title,desc,price,foot); article.append(visual,body); return article;
+    const add = document.createElement('button'); add.className='btn primary'; add.type='button'; add.textContent='افزودن به سبد +'; add.disabled = Number(p.stock || 0) <= 0; add.addEventListener('click',()=>addToCart(p.id));
+    foot.append(source,add); body.append(title,desc,stock,price,foot); article.append(visual,body); return article;
   }
   function render(){
     const q = search.value.trim().toLocaleLowerCase('fa');
@@ -85,17 +86,50 @@
     if(!list.length){const e=document.createElement('div');e.className='empty';e.textContent='کالایی با این مشخصات پیدا نشد.';grid.append(e);return;}
     list.forEach(p=>grid.append(productCard(p)));
   }
-  function addToCart(id){const item=cart.find(x=>x.id===id);if(item)item.qty+=1;else cart.push({id,qty:1});saveCart();cartDrawer.classList.add('open');}
+  function addToCart(id){
+    const product=products.find(x=>x.id===id);
+    if(!product)return;
+    const stock=Math.max(0,Number(product.stock)||0);
+    const item=cart.find(x=>x.id===id);
+    const current=item?Number(item.qty)||0:0;
+    if(current>=stock){alert('تعداد انتخاب‌شده به سقف موجودی آزمایشی رسیده است.');return;}
+    if(item)item.qty=current+1;else cart.push({id,qty:1});
+    saveCart();cartDrawer.classList.add('open');
+  }
+  function changeCartQty(id,delta){
+    const item=cart.find(x=>x.id===id);
+    const product=products.find(x=>x.id===id);
+    if(!item||!product)return;
+    const next=(Number(item.qty)||0)+delta;
+    const stock=Math.max(0,Number(product.stock)||0);
+    if(next<=0)cart=cart.filter(x=>x.id!==id);
+    else if(next>stock){alert('بیشتر از موجودی آزمایشی نمی‌توان انتخاب کرد.');return;}
+    else item.qty=next;
+    saveCart();
+  }
   function renderCart(){
     if(!cartItems)return;
     cartItems.replaceChildren();let total=0,qty=0;
-    cart.forEach(row=>{const p=products.find(x=>x.id===row.id);if(!p)return;total+=p.usd*row.qty;qty+=row.qty;
-      const item=document.createElement('div');item.className='cart-item';const info=document.createElement('div');
-      const title=document.createElement('b');title.textContent=p.name+' × '+fa(row.qty);
-      const price=document.createElement('small');price.textContent='$'+(p.usd*row.qty).toFixed(2)+(usdRate?' · '+money(roundToman(p.usd*row.qty*usdRate)):' · تبدیل تومانی نامشخص');
-      info.append(title,price);const remove=document.createElement('button');remove.type='button';remove.textContent='حذف';remove.addEventListener('click',()=>{cart=cart.filter(x=>x.id!==row.id);saveCart();});item.append(info,remove);cartItems.append(item);
+    cart=cart.filter(row=>products.some(p=>p.id===row.id)&&Number(row.qty)>0);
+    cart.forEach(row=>{
+      const p=products.find(x=>x.id===row.id);if(!p)return;
+      const itemQty=Math.min(Number(row.qty)||1,Math.max(0,Number(p.stock)||0));
+      row.qty=itemQty;if(!itemQty)return;
+      const lineTotal=p.usd*itemQty;total+=lineTotal;qty+=itemQty;
+      const item=document.createElement('div');item.className='cart-item';
+      const info=document.createElement('div');info.className='cart-item-info';
+      const title=document.createElement('b');title.textContent=p.name;
+      const price=document.createElement('small');price.textContent='$'+lineTotal.toFixed(2)+(usdRate?' · '+money(roundToman(lineTotal*usdRate)):' · تبدیل تومانی نامشخص');
+      const stock=document.createElement('small');stock.className='cart-stock-note';stock.textContent='موجودی آزمایشی: '+fa(p.stock)+' عدد';
+      info.append(title,price,stock);
+      const controls=document.createElement('div');controls.className='cart-qty';
+      const minus=document.createElement('button');minus.type='button';minus.textContent='−';minus.setAttribute('aria-label','کم کردن تعداد '+p.name);minus.addEventListener('click',()=>changeCartQty(row.id,-1));
+      const amount=document.createElement('span');amount.textContent=fa(itemQty);
+      const plus=document.createElement('button');plus.type='button';plus.textContent='+';plus.disabled=itemQty>=Number(p.stock||0);plus.setAttribute('aria-label','زیاد کردن تعداد '+p.name);plus.addEventListener('click',()=>changeCartQty(row.id,1));
+      const remove=document.createElement('button');remove.type='button';remove.className='cart-remove';remove.textContent='حذف';remove.addEventListener('click',()=>{cart=cart.filter(x=>x.id!==row.id);saveCart();});
+      controls.append(minus,amount,plus);item.append(info,controls,remove);cartItems.append(item);
     });
-    if(!qty){const empty=document.createElement('p');empty.className='empty';empty.textContent='سبد انتخابت هنوز خالی است.';cartItems.append(empty);}
+    if(!qty){const empty=document.createElement('p');empty.className='empty';empty.textContent='سبد خریدت هنوز خالی است.';cartItems.append(empty);}
     cartCount.textContent=fa(qty);cartTotal.textContent=usdRate?money(roundToman(total*usdRate)):'تبدیل تومانی نامشخص';
   }
   document.querySelectorAll('.category').forEach(btn=>btn.addEventListener('click',()=>{activeCategory=btn.dataset.category;document.querySelectorAll('.category').forEach(x=>x.classList.toggle('active',x===btn));render();}));
