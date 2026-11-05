@@ -9,7 +9,8 @@
     "usd": 15.89,
     "sourceName": "Target · Anker 30W",
     "sourceUrl": "https://www.target.com/p/-/A-94682222",
-    "imageUrl": "https://www.pixelzones.com/cdn/shop/files/az__06988.webp?v=1759421102&width=1445"
+    "imageUrl": "https://www.pixelzones.com/cdn/shop/files/az__06988.webp?v=1759421102&width=1445",
+    "stock": 5
   },
   {
     "id": 2,
@@ -21,7 +22,8 @@
     "usd": 9.99,
     "sourceName": "Officeworks · UGREEN 100W cable",
     "sourceUrl": "https://www.officeworks.com.au/shop/officeworks/p/ugreen-usb-c-to-usb-c-5a-100w-braided-cable-2m-space-grey-ugrc2mgy",
-    "imageUrl": "https://smadshop.md/image/cache/product/telefony/kabeli-i-perehodniki/ugreen/kabel-type-c-to-type-c-ugreen-15374-2m-black-750x750.jpg"
+    "imageUrl": "https://smadshop.md/image/cache/product/telefony/kabeli-i-perehodniki/ugreen/kabel-type-c-to-type-c-ugreen-15374-2m-black-750x750.jpg",
+    "stock": 5
   },
   {
     "id": 3,
@@ -33,7 +35,8 @@
     "usd": 49.99,
     "sourceName": "Ryans · Anker PowerCore 20,000mAh",
     "sourceUrl": "https://www.ryans.com/anker-powercore-20000mah-30w-power-bank",
-    "imageUrl": "https://pimcdn.sharafdg.com/cdn-cgi/image/width%3D600%2Cheight%3D600%2Cfit%3Dpad%2Cformat%3Dwebp%2Cquality%3D70/images/S400873748_1?1732193232%3Fg=0"
+    "imageUrl": "https://pimcdn.sharafdg.com/cdn-cgi/image/width%3D600%2Cheight%3D600%2Cfit%3Dpad%2Cformat%3Dwebp%2Cquality%3D70/images/S400873748_1?1732193232%3Fg=0",
+    "stock": 5
   },
   {
     "id": 4,
@@ -45,7 +48,8 @@
     "usd": 15,
     "sourceName": "Back Market · Anker ergonomic mouse",
     "sourceUrl": "https://www.backmarket.com/en-us/p/anker-a7852m-mouse-wireless/dbd54df2-a032-4d0c-a566-88e57f03c00f",
-    "imageUrl": "https://img.danawa.com/prod_img/500000/165/544/img/13544165_1.jpg?_v=20210310172312"
+    "imageUrl": "https://img.danawa.com/prod_img/500000/165/544/img/13544165_1.jpg?_v=20210310172312",
+    "stock": 5
   },
   {
     "id": 5,
@@ -57,7 +61,8 @@
     "usd": 29.99,
     "sourceName": "B&H · Logitech MK270",
     "sourceUrl": "https://www.bhphotovideo.com/c/buy/mice-keyboard-kits/ci/27331",
-    "imageUrl": "https://i02.hsncdn.com/is/image/HomeShoppingNetwork/rocs1200/logitech-mk270-wireless-combo-d-20200127171203973~7548563w.jpg"
+    "imageUrl": "https://i02.hsncdn.com/is/image/HomeShoppingNetwork/rocs1200/logitech-mk270-wireless-combo-d-20200127171203973~7548563w.jpg",
+    "stock": 5
   },
   {
     "id": 6,
@@ -69,6 +74,7 @@
     "usd": 24.99,
     "sourceName": "UNITEK · uHUB 6-in-1",
     "sourceUrl": "https://www.unitek-products.com/es-es/products/uhub-h6-6-in-1-usb-c-hub-with-pd-100w",
-    "imageUrl": "https://www.unitek-products.com/cdn/shop/files/unitek_d1113c_uHub_H6__6-in-1_USB-C_Hub_with_PD_100W_lifestyle_v1.jpg?v=1775011137&width=1000"
+    "imageUrl": "https://www.unitek-products.com/cdn/shop/files/unitek_d1113c_uHub_H6__6-in-1_USB-C_Hub_with_PD_100W_lifestyle_v1.jpg?v=1775011137&width=1000",
+    "stock": 5
   }
 ]
