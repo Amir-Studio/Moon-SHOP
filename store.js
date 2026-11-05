@@ -250,7 +250,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     if (error) {
       console.error('Supabase products error:', error);
       setConnection(false, 'خطا در اتصال به پایگاه داده');
-      grid.textContent = 'دریافت محصولات ناموفق بود. تنظیمات اتصال و دسترسی خواندن جدول را بررسی کن.';
+      grid.textContent = 'خطای Supabase: ' + (error.message || 'خطای نامشخص') + (error.code ? ' | کد: ' + error.code : '') + (error.details ? ' | جزئیات: ' + error.details : '');
       count.textContent = 'خطا در دریافت کاتالوگ';
       return;
     }
