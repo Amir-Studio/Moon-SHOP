@@ -298,3 +298,148 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
   renderCart();
   loadProducts();
 })();
+
+
+/* Category tiles + secure in-page administration */
+(() => {
+  document.querySelectorAll('.category-tile').forEach(tile => tile.addEventListener('click', () => {
+    const category = tile.dataset.category;
+    const filter = document.querySelector('.category[data-category="' + category + '"]');
+    if (filter) filter.click();
+    document.getElementById('products')?.scrollIntoView({behavior:'smooth'});
+  }));
+
+  const SUPABASE_URL = 'https://oolfbjxclhzlbwjmzxxx.supabase.co';
+  const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Q_eVY-Arb4hZQudDYrwy0Q_TbrUGAIv';
+  const client = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  const $ = id => document.getElementById(id);
+  const loginView = $('loginView'), adminView = $('adminView');
+  const loginForm = $('loginForm'), loginMessage = $('loginMessage');
+  const body = $('productsBody'), workspaceMessage = $('workspaceMessage');
+  const modal = $('productModal'), productForm = $('productForm');
+  if (!loginForm || !adminView) return;
+  let adminProducts = [];
+
+  const fa = value => Number(value || 0).toLocaleString('fa-IR');
+  const toman = value => fa(value) + ' تومان';
+  const categoryLabel = value => ({charging:'شارژ و برق',peripherals:'لوازم جانبی',connectivity:'اتصال و تبدیل',other:'سایر'})[value] || 'سایر';
+  function note(el, value, success=false) {
+    el.textContent = value;
+    el.classList.toggle('success', success);
+  }
+  function showAdmin() { loginView.classList.add('hidden'); adminView.classList.remove('hidden'); }
+  function showLogin() { adminView.classList.add('hidden'); loginView.classList.remove('hidden'); }
+  async function verifyAdmin() {
+    const {data:{session}} = await client.auth.getSession();
+    if (!session) { showLogin(); return; }
+    const {data,error} = await client.from('admin_users').select('user_id').eq('user_id',session.user.id).maybeSingle();
+    if (error || !data) {
+      await client.auth.signOut();
+      showLogin();
+      note(loginMessage, 'این حساب دسترسی مدیر ندارد.');
+      return;
+    }
+    showAdmin();
+    await loadAdminProducts();
+  }
+  loginForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    const button = $('loginButton'); button.disabled = true;
+    note(loginMessage, 'در حال بررسی اطلاعات…');
+    const {error} = await client.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
+    button.disabled = false;
+    if (error) { note(loginMessage, 'ورود ناموفق بود: ' + error.message); return; }
+    await verifyAdmin();
+  });
+  $('logoutButton').addEventListener('click', async () => {
+    await client.auth.signOut(); showLogin(); note(loginMessage, 'از حساب خارج شدید.', true);
+  });
+  async function loadAdminProducts() {
+    body.innerHTML = '<tr><td colspan="5">در حال دریافت اطلاعات…</td></tr>';
+    const {data,error} = await client.from('products')
+      .select('id,name,description,price,currency,image_url,stock,is_active,category,category_label,symbol')
+      .order('id',{ascending:true});
+    if (error) { body.innerHTML = '<tr><td colspan="5"></td></tr>'; body.querySelector('td').textContent='خطا: '+error.message; note(workspaceMessage,'دریافت اطلاعات ناموفق بود.'); return; }
+    adminProducts = data || [];
+    $('totalCount').textContent = fa(adminProducts.length);
+    $('activeCount').textContent = fa(adminProducts.filter(p=>p.is_active).length);
+    $('stockCount').textContent = fa(adminProducts.reduce((sum,p)=>sum+Number(p.stock||0),0));
+    renderAdminProducts();
+    note(workspaceMessage,'اطلاعات به‌روز شد.',true);
+  }
+  function renderAdminProducts() {
+    const query = $('adminSearchInput').value.trim().toLocaleLowerCase('fa');
+    const list = adminProducts.filter(p => (p.name||'').toLocaleLowerCase('fa').includes(query));
+    body.replaceChildren();
+    if (!list.length) { const tr=document.createElement('tr'),td=document.createElement('td');td.colSpan=5;td.textContent='محصولی پیدا نشد.';tr.append(td);body.append(tr);return; }
+    list.forEach(p => {
+      const tr=document.createElement('tr');
+      const name=document.createElement('td'); name.textContent=p.name;
+      const price=document.createElement('td'); price.textContent=toman(p.price);
+      const stock=document.createElement('td'); stock.textContent=fa(p.stock);
+      const status=document.createElement('td'); const pill=document.createElement('span');pill.className='pill'+(p.is_active?'':' inactive');pill.textContent=p.is_active?'فعال':'غیرفعال';status.append(pill);
+      const actions=document.createElement('td');
+      const edit=document.createElement('button');edit.textContent='ویرایش';edit.addEventListener('click',()=>openEditor(p));
+      const toggle=document.createElement('button');toggle.textContent=p.is_active?'مخفی‌کردن':'فعال‌کردن';toggle.addEventListener('click',()=>toggleAdminProduct(p));
+      const del=document.createElement('button');del.className='delete';del.textContent='حذف';del.addEventListener('click',()=>deleteAdminProduct(p));
+      actions.append(edit,toggle,del);tr.append(name,price,stock,status,actions);body.append(tr);
+    });
+  }
+  function openEditor(p=null) {
+    productForm.reset();
+    $('productId').value=p?.id ?? '';
+    $('modalTitle').textContent=p?'ویرایش محصول':'افزودن محصول';
+    $('productName').value=p?.name||'';
+    $('productDescription').value=p?.description||'';
+    $('productPrice').value=p?.price??'';
+    $('productStock').value=p?.stock??0;
+    $('productImage').value=p?.image_url||'';
+    $('productCategory').value=p?.category||'other';
+    $('productSymbol').value=p?.symbol||'MOON';
+    $('productActive').checked=p?Boolean(p.is_active):true;
+    note($('formMessage'),'');
+    modal.classList.remove('hidden');
+  }
+  function closeEditor(){modal.classList.add('hidden');}
+  $('addButton').addEventListener('click',()=>openEditor());
+  $('closeModal').addEventListener('click',closeEditor);
+  $('cancelButton').addEventListener('click',closeEditor);
+  modal.addEventListener('click',event=>{if(event.target===modal)closeEditor();});
+  $('adminSearchInput').addEventListener('input',renderAdminProducts);
+  $('refreshButton').addEventListener('click',loadAdminProducts);
+  productForm.addEventListener('submit',async event=>{
+    event.preventDefault();
+    const id=$('productId').value;
+    const category=$('productCategory').value;
+    const payload={
+      name:$('productName').value.trim(),
+      description:$('productDescription').value.trim()||null,
+      price:Number($('productPrice').value),
+      currency:'TOMAN',
+      stock:Number($('productStock').value),
+      image_url:$('productImage').value.trim()||null,
+      category,category_label:categoryLabel(category),
+      symbol:$('productSymbol').value.trim()||'MOON',
+      is_active:$('productActive').checked
+    };
+    if(!payload.name||!Number.isFinite(payload.price)||payload.price<0||!Number.isInteger(payload.stock)||payload.stock<0){note($('formMessage'),'نام، قیمت و موجودی را بررسی کن.');return;}
+    const button=$('saveButton');button.disabled=true;button.textContent='در حال ذخیره…';
+    const result=id?await client.from('products').update(payload).eq('id',id):await client.from('products').insert(payload);
+    button.disabled=false;button.textContent='ذخیره محصول';
+    if(result.error){note($('formMessage'),'ذخیره انجام نشد: '+result.error.message);return;}
+    closeEditor();await loadAdminProducts();
+  });
+  async function toggleAdminProduct(p){
+    const {error}=await client.from('products').update({is_active:!p.is_active}).eq('id',p.id);
+    if(error){note(workspaceMessage,'تغییر وضعیت ناموفق بود: '+error.message);return;}
+    await loadAdminProducts();
+  }
+  async function deleteAdminProduct(p){
+    if(!confirm('محصول «'+p.name+'» حذف شود؟'))return;
+    const {error}=await client.from('products').delete().eq('id',p.id);
+    if(error){note(workspaceMessage,'حذف ناموفق بود: '+error.message);return;}
+    await loadAdminProducts();
+  }
+  document.addEventListener('keydown',event=>{if(event.key==='Escape'){closeEditor();document.getElementById('cartDrawer')?.classList.remove('open');}});
+  verifyAdmin();
+})();
