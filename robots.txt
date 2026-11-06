@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://amir-studio.github.io/Moon-SHOP/sitemap.xml
