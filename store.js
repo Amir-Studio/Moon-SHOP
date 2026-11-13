@@ -63,7 +63,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     article.className = 'product-card';
     article.tabIndex=0; article.setAttribute('role','button'); article.setAttribute('aria-label','مشاهده جزئیات '+p.name);
     const visual = document.createElement('div');
-    visual.className = 'product-visual'; visual.addEventListener('click',()=>openProductDetails(p));
+    visual.className = 'product-visual';
     if (p.imageUrl) {
       const image = document.createElement('img');
       image.className = 'product-image'; image.src = p.imageUrl; image.alt = p.name;
@@ -85,7 +85,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     if (off) { const badge=document.createElement('span');badge.className='product-discount';badge.textContent=fa(off)+'٪ تخفیف';visual.append(badge); }
 
     const body=document.createElement('div');body.className='product-body';
-    const title=document.createElement('h3');title.className='product-title';title.textContent=p.name; title.addEventListener('click',()=>openProductDetails(p));
+    const title=document.createElement('h3');title.className='product-title';title.textContent=p.name;
     const desc=document.createElement('p');desc.className='product-desc';desc.textContent=p.description || '';
     const stats=reviewStats(p.id);
     const rating=document.createElement('div');rating.className='product-rating';
