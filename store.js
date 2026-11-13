@@ -203,7 +203,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     const current=select.value;
     select.replaceChildren();
     const first=document.createElement('option');first.value='';first.textContent='انتخاب محصول…';select.append(first);
-    products.filter(p=>p.isActive!==false).forEach(p=>{const option=document.createElement('option');option.value=String(p.id);option.textContent=p.name;select.append(option);});
+    products.filter(p=>p.isActive!==false && Number.isFinite(Number(p.id))).forEach(p=>{const option=document.createElement('option');option.value=String(p.id);option.textContent=p.name;select.append(option);});
     if(current) select.value=current;
   }
   function renderReviews() {
