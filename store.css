@@ -209,3 +209,63 @@ body{background:radial-gradient(ellipse at 85% -15%,#dce5ee 0,transparent 35%),#
  .showcase-card{height:68%;width:42%;max-width:155px}
  .showcase-images{inset:48px 12px 42px}
 }
+
+
+/* Moon Shop commerce demo additions */
+.category-tiles{grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.category-tile{min-height:126px}
+@media(max-width:760px){.category-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:420px){.category-tiles{grid-template-columns:1fr 1fr;gap:8px}.category-tile{padding:14px;min-height:112px}}
+.product-visual{position:relative}
+.product-discount{position:absolute;top:12px;left:12px;z-index:3;padding:5px 8px;border-radius:8px;background:#b24f4f;color:#fff;font-size:10px;font-weight:800}
+.product-featured{position:absolute;right:12px;bottom:12px;z-index:3;padding:4px 7px;border:1px solid #c8aa7870;border-radius:7px;background:#111c;color:#e7d4ae;font-size:9px}
+.product-rating{margin:7px 0;color:#aeb2bb;font-size:10px}
+.product-rating span{color:#e4bd70}
+.product-price{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 10px}
+.product-original{color:#888;font-size:10px;text-decoration:line-through}
+.product-foot{display:flex;align-items:center;gap:8px}
+.product-foot .btn{flex:1}
+.review-jump{border:1px solid var(--line2);border-radius:9px;background:transparent;color:#c9cbd1;padding:9px 10px;font-size:10px;cursor:pointer}
+.faq-section{padding:72px 0;background:#0d1118;border-block:1px solid var(--line)}
+.faq-list{max-width:900px;margin:auto;display:grid;gap:10px}
+.faq-list details{border:1px solid var(--line);border-radius:12px;background:#121821;padding:0 18px}
+.faq-list summary{cursor:pointer;list-style:none;padding:17px 0;font-size:13px;font-weight:600}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary:after{content:"＋";float:left;color:var(--gold)}
+.faq-list details[open] summary:after{content:"−"}
+.faq-list details p{margin:0;padding:0 0 17px;color:var(--muted);font-size:12px;line-height:2.2}
+.reviews-section{padding:76px 0;background:#090d13}
+.reviews-layout{display:grid;grid-template-columns:minmax(260px,.78fr) minmax(0,1.22fr);gap:24px;align-items:start}
+.review-form-card,.review-feed{border:1px solid var(--line);border-radius:18px;background:#111720;padding:22px}
+.review-form-card h3{margin:0 0 6px;font-size:18px}
+.review-form-card>p{margin:0 0 18px;color:var(--muted);font-size:11px}
+#reviewForm{display:grid;gap:12px}
+#reviewForm label{display:grid;gap:6px;color:#c5c7ce;font-size:11px}
+#reviewForm input,#reviewForm select,#reviewForm textarea{width:100%;border:1px solid var(--line2);border-radius:9px;background:#0a0e14;color:var(--ink);padding:10px;font:inherit;font-size:12px}
+#reviewForm input[type=range]{padding:0;accent-color:var(--gold)}
+#ratingValue{color:var(--gold);font-weight:700}
+.review-feed-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.review-feed-head b{font-size:14px}
+.review-feed-head span{font-size:10px;color:var(--muted)}
+.review-list{display:grid;gap:10px}
+.review-card,.admin-review-row{padding:15px;border:1px solid var(--line);border-radius:12px;background:#0d131b}
+.review-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.review-card-head b{font-size:12px}
+.review-score{color:#e6c17a;font-size:11px;white-space:nowrap}
+.review-card>small{display:block;color:#8f98a6;font-size:10px;margin-top:5px}
+.review-card p,.admin-review-row p{font-size:12px;line-height:2;color:#c5c8cf;margin:9px 0}
+.review-card .review-date{color:#707988}
+.admin-reviews-list{display:grid;gap:10px}
+.admin-review-row>small{display:block;color:#9ba2ad;font-size:10px;margin-top:4px}
+.cart-coupon{margin-top:18px;padding:14px;border:1px solid var(--line);border-radius:12px}
+.cart-coupon label{display:block;color:#c6c8ce;font-size:11px;margin-bottom:8px}
+.cart-coupon>div{display:flex;gap:7px}
+.cart-coupon input{min-width:0;flex:1;background:#0b1017;border:1px solid var(--line2);border-radius:8px;color:var(--ink);padding:9px;font:inherit;font-size:11px}
+.cart-coupon button{border:1px solid #c8aa78;color:#e4d1ad;background:#c8aa7815;border-radius:8px;padding:0 13px;font-size:11px}
+.cart-coupon small{display:block;color:#9298a4;font-size:10px;margin-top:7px}
+.cart-coupon small.success{color:#9dd6b1}
+.cart-discount-row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;color:#aeb4bf;font-size:12px}
+.cart-discount-row strong{color:#a9d7b6}
+.checkout-demo{width:100%;margin-top:10px}
+.demo-warning{display:block;color:#a5a8b0;font-size:10px;margin-top:12px;line-height:1.8}
+@media(max-width:760px){.reviews-layout{grid-template-columns:1fr}.review-form-card,.review-feed{padding:17px}}
