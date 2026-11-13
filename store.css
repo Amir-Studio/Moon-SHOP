@@ -269,3 +269,15 @@ body{background:radial-gradient(ellipse at 85% -15%,#dce5ee 0,transparent 35%),#
 .checkout-demo{width:100%;margin-top:10px}
 .demo-warning{display:block;color:#a5a8b0;font-size:10px;margin-top:12px;line-height:1.8}
 @media(max-width:760px){.reviews-layout{grid-template-columns:1fr}.review-form-card,.review-feed{padding:17px}}
+
+/* Keep only working demo-admin modules visible */
+.admin-sidebar .admin-tab[data-admin-tab="orders"],
+.admin-sidebar .admin-tab[data-admin-tab="categories"],
+.admin-sidebar .admin-tab[data-admin-tab="inventory"],
+.admin-sidebar .admin-tab[data-admin-tab="customers"],
+.admin-sidebar .admin-tab[data-admin-tab="coupons"],
+.admin-sidebar .admin-tab[data-admin-tab="messages"],
+.admin-sidebar .admin-tab[data-admin-tab="reports"],
+.admin-sidebar .admin-tab[data-admin-tab="settings"]{display:none}
+.category-list{max-width:100%;overflow-x:auto;flex-wrap:nowrap;padding-bottom:6px;scrollbar-width:thin}
+.category-list .category{white-space:nowrap;flex:none}
