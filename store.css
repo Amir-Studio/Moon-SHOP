@@ -496,3 +496,43 @@ body.modal-open{overflow:hidden}
   .footer.amirstudio-footer .footer-contact{padding:18px}
   .footer.amirstudio-footer .footer-bottom{flex-direction:column;gap:8px;margin-top:27px}
 }
+
+/* Moon Shop crescent identity */
+.brand-mark{
+  border:1px solid rgba(200,170,120,.68)!important;
+  color:#d7bd8d!important;
+  background:radial-gradient(circle,rgba(200,170,120,.12),rgba(200,170,120,.015) 72%)!important;
+  border-radius:50%!important;
+  box-shadow:0 0 20px rgba(200,170,120,.08),inset 0 0 12px rgba(200,170,120,.06)
+}
+.brand-mark:after{display:none!important}
+.moon-emblem{display:block;width:27px;height:27px;filter:drop-shadow(0 2px 5px rgba(200,170,120,.2))}
+.footer-logo-frame{width:104px;height:104px;aspect-ratio:1/1;overflow:hidden;padding:7px}
+.footer-logo-frame img{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center;display:block}
+.management-menu{position:relative;color:inherit;font-size:11px}
+.management-menu>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;color:inherit}
+.management-menu>summary::-webkit-details-marker{display:none}
+.management-menu>summary span{font-size:13px;color:#b18a50;transition:transform .2s}
+.management-menu[open]>summary span{transform:rotate(180deg)}
+.management-menu>summary:hover{color:#b18a50}
+.management-menu-panel{
+  position:fixed;z-index:90;top:86px;right:max(20px,calc((100vw - 1240px)/2));
+  width:min(1120px,calc(100vw - 40px));max-height:calc(100dvh - 108px);
+  overflow:auto;border:1px solid #d8c49e;border-radius:14px;
+  box-shadow:0 24px 90px rgba(0,0,0,.38);background:#f7f6f2
+}
+.management-menu-panel .management-section{padding:28px 22px;background:#f7f6f2;border:0}
+.management-menu-panel .management-section>.wrap{width:100%;max-width:100%}
+.management-menu-panel .section-heading{margin-bottom:12px}
+.management-menu-panel .admin-login,.management-menu-panel .admin-workspace{margin-top:12px}
+@media(max-width:580px){
+ .footer-logo-frame{width:84px;height:84px;padding:6px}
+ .management-menu{width:100%;border-bottom:1px solid #e9e5dd}
+ .management-menu>summary{padding:12px 0;width:100%;justify-content:space-between}
+ .management-menu-panel{
+   top:138px;right:10px;left:10px;width:auto;max-height:calc(100dvh - 155px);
+   border-radius:11px
+ }
+ .management-menu-panel .management-section{padding:18px 10px}
+ .management-menu-panel .admin-login,.management-menu-panel .admin-workspace{padding:16px}
+}
