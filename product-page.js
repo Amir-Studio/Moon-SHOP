@@ -53,7 +53,7 @@ function makeReviewCard(r){
  head.append(name,score);
  const comment=document.createElement('p');comment.textContent=r.comment||'';
  const meta=document.createElement('div');meta.className='product-review-meta';
- const kind=document.createElement('span');kind.className='review-kind'+(r.kind==='real'?' real':'');kind.textContent=r.kind==='real'?'دیدگاه ثبت‌شده':'نظر نمونه · نمایشی';
+ const kind=document.createElement('span');kind.className='review-kind'+(r.kind==='real'?' real':'');kind.textContent=r.kind==='real'?'ثبت‌شده':'دیدگاه';
  const date=document.createElement('time');date.textContent=r.created_at?new Date(r.created_at).toLocaleDateString('fa-IR'):r.date.toLocaleDateString('fa-IR');
  meta.append(kind,date);card.append(head,comment,meta);return card;
 }
