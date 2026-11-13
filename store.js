@@ -15,6 +15,35 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
   const OVERRIDE_KEY = 'moonDemoCatalogOverrides', ADDITIONS_KEY = 'moonDemoCatalogAdditions';
   const DEMO_PASSWORD = 'MoonDemo#1405';
 
+  // Small browser cache: show the last successful response immediately,
+  // then refresh it in the background from Supabase.
+  const PRODUCTS_CACHE_KEY = 'moonProductsCacheV1';
+  const REVIEWS_CACHE_KEY = 'moonReviewsCacheV1';
+  const CACHE_TTL = 5 * 60 * 1000;
+  let reviewsLoaded = false;
+  let reviewsRequest = null;
+  function readCache(key) {
+    try {
+      const value = JSON.parse(localStorage.getItem(key) || 'null');
+      return value && Array.isArray(value.data) && Date.now() - value.savedAt < CACHE_TTL ? value.data : null;
+    } catch { return null; }
+  }
+  function writeCache(key, data) {
+    try { localStorage.setItem(key, JSON.stringify({savedAt:Date.now(),data})); } catch {}
+  }
+  function mapProductRows(data) {
+    const base=(data||[]).map(row=>({
+      id:Number(row.id),name:row.name||'',description:row.description||'',usage:row.usage||'',features:row.features||'',specifications:row.specifications||{},price:Number(row.price)||0,
+      originalPrice:Number(row.original_price)||0,imageUrl:row.image_url||'',category:row.category||'other',
+      categoryLabel:row.category_label||CATEGORY_LABEL(row.category),symbol:row.symbol||'MOON',
+      featured:Boolean(row.is_featured),isActive:Boolean(row.is_active),demo:true
+    }));
+    products=applyLocalCatalog(base);
+    $('rateValue') && ($('rateValue').textContent=fa(products.filter(p=>p.isActive!==false).length)+' کالا');
+    render(); renderCart(); fillReviewProducts();
+    renderAdminProductsIfOpen();
+  }
+
   function safeRead(key, fallback) {
     try { const value = JSON.parse(localStorage.getItem(key) || 'null'); return value ?? fallback; }
     catch { return fallback; }
@@ -179,33 +208,58 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
   }
 
   async function loadProducts() {
-    setConnection(false,'در حال اتصال به کاتالوگ…');
-    grid.textContent='در حال دریافت محصولات…';
-    const {data,error}=await db.from('products')
-      .select('id,name,description,usage,features,specifications,price,currency,image_url,stock,category,category_label,symbol,original_price,is_featured,is_demo,is_active')
-      .eq('is_active',true).order('id',{ascending:true});
-    if(error){console.error(error);setConnection(false,'خطا در اتصال به کاتالوگ');grid.textContent='دریافت محصولات با خطا مواجه شد.';return;}
-    const base=(data||[]).map(row=>({
-      id:Number(row.id),name:row.name||'',description:row.description||'',usage:row.usage||'',features:row.features||'',specifications:row.specifications||{},price:Number(row.price)||0,
-      originalPrice:Number(row.original_price)||0,imageUrl:row.image_url||'',category:row.category||'other',
-      categoryLabel:row.category_label||CATEGORY_LABEL(row.category),symbol:row.symbol||'MOON',
-      featured:Boolean(row.is_featured),isActive:Boolean(row.is_active),demo:true
-    }));
-    products=applyLocalCatalog(base);
-    $('rateValue').textContent=fa(products.filter(p=>p.isActive!==false).length)+' کالا';
-    setConnection(true,'کاتالوگ آنلاین متصل است');
-    render(); renderCart(); fillReviewProducts();
-    renderAdminProductsIfOpen();
+    const cached=readCache(PRODUCTS_CACHE_KEY);
+    if(cached) {
+      mapProductRows(cached);
+      setConnection(false,'نمایش سریع کاتالوگ؛ در حال بروزرسانی…');
+    } else {
+      setConnection(false,'در حال اتصال به کاتالوگ…');
+      if(grid) grid.textContent='در حال دریافت محصولات…';
+    }
+    try {
+      const {data,error}=await db.from('products')
+        .select('id,name,description,usage,features,specifications,price,image_url,category,category_label,symbol,original_price,is_featured,is_active')
+        .eq('is_active',true).order('id',{ascending:true});
+      if(error) throw error;
+      const rows=data||[];
+      writeCache(PRODUCTS_CACHE_KEY,rows);
+      mapProductRows(rows);
+      setConnection(true,'کاتالوگ آنلاین متصل است');
+    } catch(error) {
+      console.error('products',error);
+      if(cached) setConnection(false,'کاتالوگ ذخیره‌شده نمایش داده می‌شود؛ اتصال موقتاً کند است');
+      else {
+        setConnection(false,'اتصال به کاتالوگ ناموفق بود');
+        if(grid) grid.textContent='دریافت محصولات انجام نشد؛ اتصال اینترنت را بررسی کن.';
+      }
+    }
   }
 
-  async function loadReviews() {
-    const {data,error}=await db.from('product_reviews')
-      .select('id,product_id,reviewer_name,rating,comment,created_at,products(name)')
-      .order('created_at',{ascending:false}).limit(100);
-    if(error){console.warn('reviews',error);reviews=[];}
-    else reviews=data||[];
-    renderReviews();render();
-    renderAdminReviews();
+  async function loadReviews({force=false}={}) {
+    if(reviewsRequest && !force) return reviewsRequest;
+    const cached=force?null:readCache(REVIEWS_CACHE_KEY);
+    if(cached) {
+      reviews=cached;
+      renderReviews();render();renderAdminReviews();
+    }
+    reviewsRequest=(async()=>{
+      try {
+        const {data,error}=await db.from('product_reviews')
+          .select('id,product_id,reviewer_name,rating,comment,created_at,products(name)')
+          .order('created_at',{ascending:false}).limit(50);
+        if(error) throw error;
+        reviews=data||[];
+        writeCache(REVIEWS_CACHE_KEY,reviews);
+        reviewsLoaded=true;
+      } catch(error) {
+        console.warn('reviews',error);
+        if(!cached && !reviews.length) reviews=[];
+      } finally {
+        renderReviews();render();renderAdminReviews();
+        reviewsRequest=null;
+      }
+    })();
+    return reviewsRequest;
   }
   function fillReviewProducts() {
     const select=$('reviewProduct');if(!select)return;
@@ -258,7 +312,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     button.disabled=false;button.textContent='ثبت دیدگاه';
     if(error){$('reviewMessage').textContent='ثبت دیدگاه انجام نشد. دوباره تلاش کن.';console.error(error);return;}
     $('reviewMessage').textContent='دیدگاهت ثبت شد. ممنون از مشارکتت!';
-    $('reviewComment').value='';await loadReviews();
+    $('reviewComment').value='';await loadReviews({force:true});
   });
 
   document.querySelectorAll('.category').forEach(btn=>btn.addEventListener('click',()=>{
@@ -374,7 +428,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     const selected=tab.dataset.adminTab;
     document.querySelectorAll('[data-admin-tab]').forEach(x=>x.classList.toggle('active',x===tab));
     document.querySelectorAll('[data-admin-panel]').forEach(panel=>panel.classList.toggle('hidden',panel.dataset.adminPanel!==selected));
-    if(selected==='reviews')renderAdminReviews();
+    if(selected==='reviews')loadReviews();
   }));
   productForm?.addEventListener('submit',e=>{
     e.preventDefault();
@@ -397,5 +451,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeEditor();closeProductDetails();cartDrawer?.classList.remove('open');}});
   if(sessionStorage.getItem('moonDemoAdminUnlocked')==='1')showAdmin();else showLogin();
 
-  loadCart();loadProducts();loadReviews();
+  loadCart();loadProducts();
+  // Do not query the reviews table on the storefront landing page or before an admin opens that tab.
+  if($('reviewList')) loadReviews();
 })();
