@@ -65,3 +65,11 @@
   .footer.amirstudio-footer .footer-contact{padding:18px}
   .footer.amirstudio-footer .footer-bottom{flex-direction:column;gap:8px;margin-top:27px}
 }
+
+/* Matching crescent mark and corrected AmirStudio footer logo proportions */
+.brand-mark{border:1px solid rgba(200,170,120,.68)!important;color:#d7bd8d!important;background:radial-gradient(circle,rgba(200,170,120,.12),rgba(200,170,120,.015) 72%)!important;border-radius:50%!important;box-shadow:0 0 20px rgba(200,170,120,.08),inset 0 0 12px rgba(200,170,120,.06)}
+.brand-mark:after{display:none!important}
+.moon-emblem{display:block;width:27px;height:27px;filter:drop-shadow(0 2px 5px rgba(200,170,120,.2))}
+.footer-logo-frame{width:104px;height:104px;aspect-ratio:1/1;overflow:hidden;padding:7px}
+.footer-logo-frame img{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center;display:block}
+@media(max-width:700px){.footer-logo-frame{width:84px;height:84px;padding:6px}}
