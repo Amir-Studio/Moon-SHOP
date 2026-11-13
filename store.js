@@ -126,26 +126,8 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
   }
 
   function openProductDetails(p) {
-    const modal=$('productDetailsModal'); if(!modal||!p)return;
-    $('detailName').textContent=p.name;
-    $('detailCategory').textContent=p.categoryLabel||CATEGORY_LABEL(p.category);
-    $('detailPrice').textContent=money(p.price);
-    $('detailDescription').textContent=p.description||'اطلاعات توضیحی این محصول در حال تکمیل است.';
-    $('detailUsage').textContent=p.usage||'برای کاربرد روزمره؛ سازگاری دستگاه و نیاز خود را پیش از انتخاب بررسی کن.';
-    const photo=$('detailPhoto');photo.replaceChildren();
-    if(p.imageUrl){
-      const img=document.createElement('img');img.src=p.imageUrl;img.alt=p.name;img.loading='eager';img.referrerPolicy='no-referrer';
-      img.onerror=()=>{img.remove();const fallback=document.createElement('div');fallback.className='details-image-fallback';fallback.textContent=p.categoryLabel||'تصویر محصول';photo.append(fallback);};
-      photo.append(img);
-    }else{const fallback=document.createElement('div');fallback.className='details-image-fallback';fallback.textContent=p.categoryLabel||'تصویر محصول';photo.append(fallback);}
-    const features=$('detailFeatures');features.replaceChildren();
-    String(p.features||'کاربرد روزمره|طراحی کاربردی|بررسی سازگاری پیش از خرید').split('|').filter(Boolean).forEach(value=>{const li=document.createElement('li');li.textContent=value;features.append(li);});
-    const specs=$('detailSpecs');specs.replaceChildren();
-    const specData=p.specifications&&typeof p.specifications==='object'?p.specifications:{};
-    Object.entries(specData).forEach(([key,value])=>{const dt=document.createElement('dt');dt.textContent=key;const dd=document.createElement('dd');dd.textContent=String(value);specs.append(dt,dd);});
-    $('detailAddCart').onclick=()=>{addToCart(p.id);modal.classList.add('hidden');};
-    $('detailReview').onclick=()=>{$('reviewProduct').value=String(p.id);modal.classList.add('hidden');$('reviews').scrollIntoView({behavior:'smooth'});};
-    modal.classList.remove('hidden');document.body.classList.add('modal-open');
+    if(!p)return;
+    window.location.href='product.html?id='+encodeURIComponent(p.id);
   }
   function closeProductDetails(){ $('productDetailsModal')?.classList.add('hidden');document.body.classList.remove('modal-open'); }
 
