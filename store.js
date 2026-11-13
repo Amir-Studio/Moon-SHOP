@@ -286,6 +286,9 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
   $('checkoutDemo')?.addEventListener('click',()=>alert('این یک نمونه‌کار نمایشی است؛ درگاه پرداخت و ثبت سفارش واقعی هنوز فعال نشده است.'));
   $('menuToggle')?.addEventListener('click',()=>{const open=$('mainNav').classList.toggle('open');$('menuToggle').setAttribute('aria-expanded',String(open));});
   document.querySelectorAll('#mainNav a').forEach(a=>a.addEventListener('click',()=>{$('mainNav').classList.remove('open');$('menuToggle').setAttribute('aria-expanded','false');}));
+  const managementMenu=document.querySelector('.management-menu');
+  document.addEventListener('click',event=>{if(managementMenu?.open&&!managementMenu.contains(event.target))managementMenu.open=false;});
+  managementMenu?.querySelector('.management-menu-panel')?.addEventListener('click',event=>event.stopPropagation());
 
   // Demo-only admin: changes are stored in this browser, not in the shared database.
   const loginView=$('loginView'),adminView=$('adminView'),loginForm=$('loginForm');
