@@ -507,8 +507,8 @@ body.modal-open{overflow:hidden}
 }
 .brand-mark:after{display:none!important}
 .moon-emblem{display:block;width:27px;height:27px;filter:drop-shadow(0 2px 5px rgba(200,170,120,.2))}
-.footer-logo-frame{width:104px;height:104px;aspect-ratio:1/1;overflow:hidden;padding:7px}
-.footer-logo-frame img{width:100%;height:100%;max-width:100%;max-height:100%;object-fit:contain;object-position:center;display:block}
+.footer-logo-frame{width:96px;height:96px;aspect-ratio:1/1;overflow:hidden;padding:6px}
+.footer-logo-frame img{width:82px;height:82px;max-width:100%;max-height:100%;border-radius:50%;object-fit:contain;object-position:center;display:block}
 .management-menu{position:relative;color:inherit;font-size:11px}
 .management-menu>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:8px;white-space:nowrap;color:inherit}
 .management-menu>summary::-webkit-details-marker{display:none}
@@ -526,7 +526,8 @@ body.modal-open{overflow:hidden}
 .management-menu-panel .section-heading{margin-bottom:12px}
 .management-menu-panel .admin-login,.management-menu-panel .admin-workspace{margin-top:12px}
 @media(max-width:580px){
- .footer-logo-frame{width:84px;height:84px;padding:6px}
+ .footer-logo-frame{width:80px;height:80px;padding:5px}
+ .footer-logo-frame img{width:68px;height:68px}
  .management-menu{width:100%;border-bottom:1px solid #e9e5dd}
  .management-menu>summary{padding:12px 0;width:100%;justify-content:space-between}
  .management-menu-panel{
