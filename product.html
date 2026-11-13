@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f4f7fa">
+<meta name="description" content="مشخصات کامل، بررسی و دیدگاه‌های کاربران درباره محصول در Moon Shop.">
+<meta property="og:type" content="product">
+<title>جزئیات محصول | Moon Shop</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="store.css">
+<link rel="stylesheet" href="product-page.css">
+</head>
+<body class="product-page-body">
+<div class="announcement"><div class="wrap announcement-inner"><span>MOON SHOP · جزئیات محصول</span><span><a href="index.html">بازگشت به فروشگاه ←</a></span></div></div>
+<header class="header"><div class="wrap header-inner">
+<a class="brand" href="index.html" aria-label="MOON SHOP"><span class="brand-mark">M</span><span class="brand-name">MOON<span>SHOP</span><small>فروشگاه لوازم دیجیتال</small></span></a>
+<nav class="nav"><a href="index.html#products">همه محصولات</a><a href="#productReviews">دیدگاه‌ها</a></nav>
+<div class="header-actions"><a class="account-link" href="index.html#help">راهنمای خرید</a><a class="cart-trigger" href="index.html#products">ادامه خرید</a></div>
+</div></header>
+<main class="product-page wrap">
+<div class="product-breadcrumb"><a href="index.html">خانه</a><span>←</span><a href="index.html#products">فروشگاه</a><span>←</span><b id="breadcrumbName">جزئیات محصول</b></div>
+<div id="productState" class="product-state">در حال دریافت اطلاعات محصول…</div>
+<section id="productContent" class="product-detail-main hidden">
+<div class="product-gallery"><div class="product-main-image" id="productImage"><span>MOON</span></div><div class="gallery-caption">تصویر محصول · نسبت اصلی تصویر حفظ می‌شود</div></div>
+<div class="product-info-panel">
+<div class="product-overline"><span id="productCategory">دسته‌بندی</span><span id="productCode">MOON</span></div>
+<h1 id="productName">نام محصول</h1>
+<p class="product-short-description" id="productDescription"></p>
+<div class="product-rating-summary" id="ratingSummary"></div>
+<div class="product-price-panel"><div><small>قیمت نمایشی</small><strong id="productPrice">—</strong></div><span class="demo-price-tag">اطلاعات نمونه‌کار</span></div>
+<div class="product-action-row"><button id="addToCart" class="btn primary" type="button">افزودن به سبد خرید</button><a class="btn subtle" href="#productReviews">خواندن و ثبت دیدگاه</a></div>
+<p class="product-demo-disclaimer">این فروشگاه در نسخهٔ نمونه‌کار است؛ قیمت و موجودی به‌معنای پیشنهاد فروش یا موجودی قطعی نیست و پرداخت واقعی فعال نشده است.</p>
+</div>
+</section>
+<section id="productMore" class="product-more hidden">
+<div class="product-detail-columns">
+<article class="product-info-card"><span class="kicker">PRODUCT OVERVIEW</span><h2>دربارهٔ این محصول</h2><p id="productLongDescription"></p><h3>کاربرد و تجربهٔ استفاده</h3><p id="productUsage"></p></article>
+<article class="product-info-card"><span class="kicker">KEY FEATURES</span><h2>ویژگی‌های مهم</h2><ul id="productFeatures"></ul></article>
+<article class="product-info-card product-spec-card"><span class="kicker">TECHNICAL DETAILS</span><h2>مشخصات فنی</h2><dl id="productSpecs"></dl></article>
+</div>
+<section class="marketplace-product-card"><div><span class="kicker">COMPARE & DISCOVER</span><h2>بررسی این مدل در بازارهای دیگر</h2><p>برای مشاهدهٔ نتیجه‌های جست‌وجو، روی پلتفرم موردنظر بزن. این پیوندها جست‌وجوی همان نام محصول‌اند و اتصال API یا همگام‌سازی قیمت نیستند.</p></div><div class="product-marketplace-links" id="productMarketplaces"></div></section>
+</section>
+<section id="productReviews" class="product-reviews-section hidden">
+<div class="reviews-title-row"><div><span class="kicker">COMMUNITY REVIEWS</span><h2>دیدگاه‌ها و امتیازها</h2><p>نظرهای نمونه با برچسب مشخص شده‌اند؛ دیدگاه‌های ثبت‌شدهٔ کاربران جداگانه نمایش داده می‌شوند.</p></div><div class="review-score-card" id="reviewScoreCard"></div></div>
+<div class="product-reviews-layout">
+<form class="product-review-form" id="productReviewForm"><h3>ثبت دیدگاه شما</h3><p>اگر این محصول را بررسی کرده‌ای، امتیاز و نظرت را ثبت کن.</p>
+<label>نام نمایشی<input id="reviewerName" maxlength="60" required minlength="2" placeholder="نام شما"></label>
+<label>امتیاز شما <b id="reviewRatingValue">۸ از ۱۰</b><input id="reviewRating" type="range" min="1" max="10" value="8"></label>
+<label>متن دیدگاه<textarea id="reviewText" rows="5" minlength="8" maxlength="1200" required placeholder="نقاط قوت، محدودیت‌ها یا تجربه‌ات را بنویس…"></textarea></label>
+<button class="btn primary" id="submitReview" type="submit">ثبت دیدگاه</button><div id="reviewNotice" class="review-notice" role="status"></div>
+</form>
+<div class="review-list-panel"><div class="review-list-toolbar"><b>دیدگاه‌های این محصول</b><span id="productReviewCount">—</span></div><div id="productReviewList" class="product-review-list"><p class="product-state">در حال بارگذاری دیدگاه‌ها…</p></div></div>
+</div>
+</section>
+</main>
+<footer class="footer"><div class="wrap footer-bottom"><span>© 2026 MOON SHOP</span><a href="index.html#products">بازگشت به فروشگاه</a></div></footer>
+<script type="module" src="product-page.js"></script>
+</body></html>
