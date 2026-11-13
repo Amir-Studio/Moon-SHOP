@@ -1,4 +1,4 @@
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/+esm';
 const db=createClient('https://oolfbjxclhzlbwjmzxxx.supabase.co','sb_publishable_Q_eVY-Arb4hZQudDYrwy0Q_TbrUGAIv');
 const $=id=>document.getElementById(id);
 const fa=n=>Number(n||0).toLocaleString('fa-IR');
