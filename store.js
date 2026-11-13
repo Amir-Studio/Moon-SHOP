@@ -89,18 +89,18 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     const stats=reviewStats(p.id);
     const rating=document.createElement('div');rating.className='product-rating';
     rating.innerHTML = stats.count ? '<span>★</span> '+fa(stats.avg.toFixed(1))+' از ۱۰ · '+fa(stats.count)+' دیدگاه' : '<span>☆</span> هنوز امتیازی ثبت نشده';
-    const stock=document.createElement('small');stock.className='product-stock';stock.textContent='کالای نمایشی · موجودی واقعی بررسی نشده';
+    const stock=document.createElement('small');stock.className='product-stock';stock.textContent='اطلاعات و موجودی نمونه‌کار';
     const price=document.createElement('div');price.className='product-price';
     const amount=document.createElement('strong');amount.className='usd';amount.textContent=money(p.price);
     const currencyLabel=document.createElement('div');currencyLabel.className='irr';currencyLabel.textContent='قیمت نمایشی';
     price.append(amount,currencyLabel);
     if (off) { const original=document.createElement('del');original.className='product-original';original.textContent=money(p.originalPrice);price.append(original); }
     const foot=document.createElement('div');foot.className='product-foot';
-    const add=document.createElement('button');add.className='btn primary';add.type='button';add.textContent='افزودن به سبد +';
+    const detailsBtn=document.createElement('button');detailsBtn.className='product-details-btn';detailsBtn.type='button';detailsBtn.textContent='مشاهده جزئیات';
+    detailsBtn.addEventListener('click',()=>openProductDetails(p));
+    const add=document.createElement('button');add.className='btn primary';add.type='button';add.textContent='افزودن به سبد';
     add.addEventListener('click',()=>addToCart(p.id));
-    const reviewBtn=document.createElement('button');reviewBtn.className='review-jump';reviewBtn.type='button';reviewBtn.textContent='ثبت نظر';
-    reviewBtn.addEventListener('click',()=>{ $('reviewProduct').value=String(p.id); $('reviews').scrollIntoView({behavior:'smooth'}); });
-    foot.append(add,reviewBtn);
+    foot.append(detailsBtn,add);
     body.append(title,desc,rating,stock,price,foot);
     article.append(visual,body);
     return article;
@@ -121,6 +121,30 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     if (!list.length) { const empty=document.createElement('div');empty.className='empty';empty.textContent='کالایی با این مشخصات پیدا نشد.';grid.append(empty);return; }
     list.forEach(p=>grid.append(productCard(p)));
   }
+
+  function openProductDetails(p) {
+    const modal=$('productDetailsModal'); if(!modal||!p)return;
+    $('detailName').textContent=p.name;
+    $('detailCategory').textContent=p.categoryLabel||CATEGORY_LABEL(p.category);
+    $('detailPrice').textContent=money(p.price);
+    $('detailDescription').textContent=p.description||'اطلاعات توضیحی این محصول در حال تکمیل است.';
+    $('detailUsage').textContent=p.usage||'برای کاربرد روزمره؛ سازگاری دستگاه و نیاز خود را پیش از انتخاب بررسی کن.';
+    const photo=$('detailPhoto');photo.replaceChildren();
+    if(p.imageUrl){
+      const img=document.createElement('img');img.src=p.imageUrl;img.alt=p.name;img.loading='eager';img.referrerPolicy='no-referrer';
+      img.onerror=()=>{img.remove();const fallback=document.createElement('div');fallback.className='details-image-fallback';fallback.textContent=p.categoryLabel||'تصویر محصول';photo.append(fallback);};
+      photo.append(img);
+    }else{const fallback=document.createElement('div');fallback.className='details-image-fallback';fallback.textContent=p.categoryLabel||'تصویر محصول';photo.append(fallback);}
+    const features=$('detailFeatures');features.replaceChildren();
+    String(p.features||'کاربرد روزمره|طراحی کاربردی|بررسی سازگاری پیش از خرید').split('|').filter(Boolean).forEach(value=>{const li=document.createElement('li');li.textContent=value;features.append(li);});
+    const specs=$('detailSpecs');specs.replaceChildren();
+    const specData=p.specifications&&typeof p.specifications==='object'?p.specifications:{};
+    Object.entries(specData).forEach(([key,value])=>{const dt=document.createElement('dt');dt.textContent=key;const dd=document.createElement('dd');dd.textContent=String(value);specs.append(dt,dd);});
+    $('detailAddCart').onclick=()=>{addToCart(p.id);modal.classList.add('hidden');};
+    $('detailReview').onclick=()=>{$('reviewProduct').value=String(p.id);modal.classList.add('hidden');$('reviews').scrollIntoView({behavior:'smooth'});};
+    modal.classList.remove('hidden');document.body.classList.add('modal-open');
+  }
+  function closeProductDetails(){ $('productDetailsModal')?.classList.add('hidden');document.body.classList.remove('modal-open'); }
 
   function addToCart(id) {
     const p=products.find(x=>String(x.id)===String(id));
@@ -173,11 +197,11 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     setConnection(false,'در حال اتصال به کاتالوگ…');
     grid.textContent='در حال دریافت محصولات…';
     const {data,error}=await db.from('products')
-      .select('id,name,description,price,currency,image_url,stock,category,category_label,symbol,original_price,is_featured,is_demo,is_active')
+      .select('id,name,description,usage,features,specifications,price,currency,image_url,stock,category,category_label,symbol,original_price,is_featured,is_demo,is_active')
       .eq('is_active',true).order('id',{ascending:true});
     if(error){console.error(error);setConnection(false,'خطا در اتصال به کاتالوگ');grid.textContent='دریافت محصولات با خطا مواجه شد.';return;}
     const base=(data||[]).map(row=>({
-      id:Number(row.id),name:row.name||'',description:row.description||'',price:Number(row.price)||0,
+      id:Number(row.id),name:row.name||'',description:row.description||'',usage:row.usage||'',features:row.features||'',specifications:row.specifications||{},price:Number(row.price)||0,
       originalPrice:Number(row.original_price)||0,imageUrl:row.image_url||'',category:row.category||'other',
       categoryLabel:row.category_label||CATEGORY_LABEL(row.category),symbol:row.symbol||'MOON',
       featured:Boolean(row.is_featured),isActive:Boolean(row.is_active),demo:true
@@ -263,6 +287,8 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     $('products').scrollIntoView({behavior:'smooth'});
   }));
   search?.addEventListener('input',render);sort?.addEventListener('change',render);
+  $('detailsClose')?.addEventListener('click',closeProductDetails);
+  $('productDetailsModal')?.addEventListener('click',e=>{if(e.target===$('productDetailsModal'))closeProductDetails();});
   $('cartButton')?.addEventListener('click',()=>cartDrawer.classList.add('open'));
   $('cartClose')?.addEventListener('click',()=>cartDrawer.classList.remove('open'));
   cartDrawer?.addEventListener('click',e=>{if(e.target===cartDrawer)cartDrawer.classList.remove('open');});
@@ -380,7 +406,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
     products=applyLocalCatalog(products.filter(p=>String(p.id)!==String(id)).concat(product));
     closeEditor();loadAdminProducts();render();fillReviewProducts();
   });
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeEditor();cartDrawer?.classList.remove('open');}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeEditor();closeProductDetails();cartDrawer?.classList.remove('open');}});
   if(sessionStorage.getItem('moonDemoAdminUnlocked')==='1')showAdmin();else showLogin();
 
   loadCart();loadProducts();loadReviews();
