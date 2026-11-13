@@ -1,9 +1,14 @@
-import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/+esm';
+import catalogSnapshot from './catalog.js';
 
 (() => {
   const SUPABASE_URL = 'https://oolfbjxclhzlbwjmzxxx.supabase.co';
   const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_Q_eVY-Arb4hZQudDYrwy0Q_TbrUGAIv';
-  const db = createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY);
+  let dbPromise = null;
+  async function getDb() {
+    if (!dbPromise) dbPromise = import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/+esm')
+      .then(({createClient}) => createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY));
+    return dbPromise;
+  }
   const $ = id => document.getElementById(id);
   const fa = n => Number(n || 0).toLocaleString('fa-IR');
   const money = n => Math.round(Number(n || 0)).toLocaleString('fa-IR') + ' تومان';
@@ -217,6 +222,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
       if(grid) grid.textContent='در حال دریافت محصولات…';
     }
     try {
+      const db=await getDb();
       const {data,error}=await db.from('products')
         .select('id,name,description,usage,features,specifications,price,image_url,category,category_label,symbol,original_price,is_featured,is_active')
         .eq('is_active',true).order('id',{ascending:true});
@@ -244,6 +250,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
     }
     reviewsRequest=(async()=>{
       try {
+        const db=await getDb();
         const {data,error}=await db.from('product_reviews')
           .select('id,product_id,reviewer_name,rating,comment,created_at,products(name)')
           .order('created_at',{ascending:false}).limit(50);
@@ -308,6 +315,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
     const score=Number(rating.value);
     if(!productId||reviewerName.length<2||comment.length<8){$('reviewMessage').textContent='لطفاً همه فیلدها را کامل کن.';return;}
     const button=$('reviewSubmit');button.disabled=true;button.textContent='در حال ثبت…';
+    const db=await getDb();
     const {error}=await db.from('product_reviews').insert({product_id:productId,reviewer_name:reviewerName,rating:score,comment,is_approved:true});
     button.disabled=false;button.textContent='ثبت دیدگاه';
     if(error){$('reviewMessage').textContent='ثبت دیدگاه انجام نشد. دوباره تلاش کن.';console.error(error);return;}
@@ -451,7 +459,11 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
   document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeEditor();closeProductDetails();cartDrawer?.classList.remove('open');}});
   if(sessionStorage.getItem('moonDemoAdminUnlocked')==='1')showAdmin();else showLogin();
 
-  loadCart();loadProducts();
+  loadCart();
+  // Render the bundled product snapshot immediately; Supabase is loaded afterwards.
+  mapProductRows(catalogSnapshot);
+  setConnection(false,'کاتالوگ آماده است؛ در حال همگام‌سازی…');
+  loadProducts();
   // Do not query the reviews table on the storefront landing page or before an admin opens that tab.
   if($('reviewList')) loadReviews();
 })();
